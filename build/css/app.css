@@ -5883,3 +5883,47 @@ th.hide-for-touch {
 
 .top-bar .title-area .name a img {
   margin: 15px auto; }
+
+.product-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  background-size: contain;
+  background-clip: content-box;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: white;
+  -webkit-box-shadow: 0px 2px 5px 0px rgba(39, 39, 39, 0.5);
+          box-shadow: 0px 2px 5px 0px rgba(39, 39, 39, 0.5); }
+  .product-container .product-description {
+    position: absolute;
+    height: 60px;
+    width: 100%;
+    bottom: 0;
+    background: rgba(39, 39, 39, 0.7);
+    color: #FFFFFF; }
+    .product-container .product-description .product-brand {
+      position: absolute;
+      top: 0;
+      left: 0;
+      line-height: 35px; }
+    .product-container .product-description .product-name {
+      position: absolute;
+      top: 35px;
+      left: 0;
+      line-height: 25px; }
+    .product-container .product-description .product-price {
+      position: absolute;
+      top: 0;
+      left: 100%;
+      -webkit-transform: translateX(-100%);
+          -ms-transform: translateX(-100%);
+              transform: translateX(-100%);
+      line-height: 60px; }
+  .product-container .buy-button {
+    position: absolute;
+    top: 10px;
+    left: 100%;
+    -webkit-transform: translateX(calc(-100% - 10px));
+        -ms-transform: translateX(calc(-100% - 10px));
+            transform: translateX(calc(-100% - 10px)); }
