@@ -1,0 +1,36 @@
+<div class="contain-to-grid">
+  <nav class="top-bar" data-topbar role="navigation">
+    <ul class="title-area">
+      <li class="name">
+        <a href="#"><img src="assets/storeluv-logo.png"></a>
+      </li>
+       <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+      <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
+    </ul>
+
+    <section class="top-bar-section">
+      <!-- Right Nav Section -->
+      <ul class="right">
+        <li><a href="">Sign in</a></li>
+      </ul>
+    </section>
+  </nav>
+</div>
+
+<dl class="sub-nav">
+  <div class="row">
+  <dd class="active"><a href="#">Trending</a></dd>
+  <dd><a href="#">Mens</a></dd>
+  <dd><a href="#">Womens</a></dd>
+  <dd><a href="#">Sale</a></dd>
+  </div>
+</dl>
+
+<div class="row" ng-controller="ProductsController as products">
+  <ul class="small-block-grid-1 medium-block-grid-2 large-block-grid-5">
+    <li ng-repeat="product in products.products" ng-click="products.openLink(product)">
+      <img ng-src="{{product.image_url}}"/>
+      {{ product.name }}
+    </li>
+  </ul>
+</div>
