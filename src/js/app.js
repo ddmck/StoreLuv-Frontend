@@ -25,7 +25,7 @@ app.controller('ProductsController', ['$http', function($http){
   var productCtrl = this;
   productCtrl.products = [];
 
-  $http.get('http://localhost:3000/products.json', {params: {page: 2}}).success(function(data){
+  $http.get('http://localhost:3000/products.json', {params: {page: 4}}).success(function(data){
     productCtrl.products = data;
   });
 
