@@ -1216,7 +1216,7 @@ $sub-nav-border-radius: 0px;
 // We use these to control the active item styles
 // $sub-nav-active-font-weight: $font-weight-normal;
 $sub-nav-active-bg: $off-white;
-// $sub-nav-active-bg-hover: scale-color($sub-nav-active-bg, $lightness: -14%);
+$sub-nav-active-bg-hover: scale-color($sub-nav-active-bg, $lightness: -0%);
 $sub-nav-active-color: $purple;
 // $sub-nav-active-padding: $sub-nav-padding;
 // $sub-nav-active-cursor: default;
