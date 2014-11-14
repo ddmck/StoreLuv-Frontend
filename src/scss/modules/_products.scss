@@ -15,31 +15,47 @@
     height: 60px;
     width: 100%;
     bottom: 0;
-    background: rgba($dark-grey, 0.7);
+    background: rgba($dark-grey, 0.5);
     color: $white;
 
     .product-brand {
       position: absolute;
-      top: 0;
+      top: 10px;
       left: 0;
-      line-height: 35px;
+      line-height: 14px;
+      max-height: 14px;
+      font-size: 14px;
+      font-weight: bold;
+      text-indent: 10px;
+      max-width: 75%;
+      text-overflow: ellipsis;
+      white-space:nowrap;
+      overflow:hidden;
     }
     .product-name {
       position: absolute;
-      top: 35px;
+      top: 38px;
       left: 0;
-      line-height: 25px;
+      line-height: 12px;
+      max-height: 12px;
+      font-size: 12px;
+      text-indent: 10px;
+      max-width: 75%;
+      text-overflow: ellipsis;
+      white-space:nowrap;
+      overflow:hidden;
     }
     .product-price {
       position: absolute;
       top: 0;
       left: 100%;
-      transform: translateX(-100%);
+      transform: translateX(calc(-100% - 10px));
       line-height: 60px;
     }
   }
 
   .buy-button {
+    @include button(rem-calc(4), $purple);
     position:absolute;
 
     top: 10px;

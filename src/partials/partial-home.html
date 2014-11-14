@@ -16,27 +16,28 @@
     </section>
   </nav>
 </div>
-
-<dl class="sub-nav">
-  <div class="row">
-  <dd class="active"><a href="#">Trending</a></dd>
-  <dd><a href="#">Mens</a></dd>
-  <dd><a href="#">Womens</a></dd>
-  <dd><a href="#">Sale</a></dd>
-  </div>
-</dl>
+<div class="sub-nav-container">
+  <dl class="sub-nav">
+    <div class="row">
+    <dd class="active"><a href="#">Trending</a></dd>
+    <dd><a href="#">Mens</a></dd>
+    <dd><a href="#">Womens</a></dd>
+    <dd><a href="#">Sale</a></dd>
+    </div>
+  </dl>
+</div>
 
 <div class="row" ng-controller="ProductsController as products">
   <ul class="small-block-grid-1 medium-block-grid-2 large-block-grid-4">
     <li ng-repeat="product in products.products" >
       <div ng-style="{'background-image':'url('+ product.image_url +')'}" class="product-container">
         <!-- <img ng-src="{{product.image_url}}"/> -->
-        <a class="button buy-button tiny" ng-click="products.openLink(product)">Buy</a> 
+        <a class="button buy-button" ng-click="products.openLink(product)">Buy</a> 
         <div class="product-description">
 
           <p class="product-brand">{{ product.brand_name }}</p>
           <p class="product-name">{{ product.name }}</p>
-          <p class="product-price">{{ product.sale_price }}</p>
+          <p class="product-price">{{ product.sale_price | currency : '£' }}</p>
         </div>
         
       </div>

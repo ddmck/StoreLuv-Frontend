@@ -1,3 +1,15 @@
 .top-bar .title-area .name a img {
-  margin: 15px auto;
+  margin: 15px;
+}
+
+.sub-nav-container {
+  width: 100%;
+  height: $sub-nav-height;
+  background-color: $purple;
+  margin-bottom: 20px;
+
+  dl.sub-nav {
+    line-height: $sub-nav-height;
+    // padding-top: 0px;
+  }
 }
