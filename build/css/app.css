@@ -5977,3 +5977,6 @@ th.hide-for-touch {
       background-color: #700237; }
     .product-container .buy-button:hover, .product-container .buy-button:focus {
       color: #FFFFFF; }
+
+html {
+  -webkit-font-smoothing: antialiased; }

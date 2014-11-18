@@ -5,13 +5,17 @@ var resolve = function(file) {
 module.exports = 
   {
     files: [
-      resolve('angular.min'),
-      resolve('angular-ui-router.min'),
-      resolve('fastclick'),
       resolve('jquery'),
       resolve('jquery.cookie'),
+      resolve('angular.min'),
+      resolve('angular-ui-router.min'),
+
+      resolve('fastclick'),
+
+
       resolve('modernizr'),
       resolve('foundation.min'),
-      resolve('placeholder')
+      resolve('placeholder'),
+      resolve('ng-infinite-scroll')
     ]
   }

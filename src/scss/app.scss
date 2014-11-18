@@ -5,3 +5,7 @@
 
 @import "modules/_nav";
 @import "modules/_products";
+
+html {
+  -webkit-font-smoothing: antialiased;
+}

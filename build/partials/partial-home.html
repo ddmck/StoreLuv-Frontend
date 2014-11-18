@@ -16,20 +16,20 @@
     </section>
   </nav>
 </div>
-<div class="sub-nav-container">
+<div class="sub-nav-container" ng-controller="SubNavController as SubNavCtlr">
   <dl class="sub-nav">
     <div class="row">
-    <dd class="active"><a href="#">Trending</a></dd>
-    <dd><a href="#">Mens</a></dd>
-    <dd><a href="#">Womens</a></dd>
-    <dd><a href="#">Sale</a></dd>
+    <dd ng-class="{active: tab === nil}" ng-click="SubNavCtlr.setGender(null); tab = nil"><a>Trending</a></dd>
+    <dd ng-class="{active: tab === 1}" ng-click="SubNavCtlr.setGender('mens'); tab = 1"><a>Mens</a></dd>
+    <dd ng-class="{active: tab === 2}" ng-click="SubNavCtlr.setGender('womens'); tab = 2"><a>Womens</a></dd>
+    <!-- <dd><a href="#">Sale</a></dd> -->
     </div>
   </dl>
 </div>
 
-<div class="row" ng-controller="ProductsController as products">
-  <ul class="small-block-grid-1 medium-block-grid-2 large-block-grid-4">
-    <li ng-repeat="product in products.products" >
+<div class="row" ng-controller="ProductsController as products" infinite-scroll="products.nextPage(products.products)" infinite-scroll-distance="3" infinite-scroll-immediate-check='{{ products.scrollActive }}'>
+  <ul class="small-block-grid-1 medium-block-grid-2 large-block-grid-4" >
+    <li ng-repeat="product in products.products.getProducts() track by $index" >
       <div ng-style="{'background-image':'url('+ product.image_url +')'}" class="product-container">
         <!-- <img ng-src="{{product.image_url}}"/> -->
         <a class="button buy-button" ng-click="products.openLink(product)">Buy</a> 
