@@ -37,7 +37,7 @@ app.factory('Products', ['$http', 'Filters', function($http, Filters){
       products = products.concat(newProducts);
     },
     fetchProducts: function(){
-      $http.get('http://localhost:3000/products.json', {params: {page: "1", gender: Filters.gender}}).success(function(data){
+      $http.get('http://localhost:3000/products.json', {params: {page: "1", gender: Filters.gender, category: Filters.category}}).success(function(data){
         products = products.concat(data);
         scrollActive = true;
       });
@@ -54,7 +54,7 @@ app.controller('ProductsController',  ['$http', 'Filters', 'Products', function(
   this.filters = Filters;
   var currentPage = 1;
 
-  $http.get('http://localhost:3000/products.json', {params: {page: currentPage.toString(), filters: JSON.stringify(this.filters)}}).success(function(data){
+  $http.get('http://localhost:3000/products.json', {params: {page: currentPage.toString(), gender: this.filters.gender, category: this.filters.category}}).success(function(data){
     productCtrl.products.addProducts(data);
     scrollActive = true;
   });
@@ -68,7 +68,7 @@ app.controller('ProductsController',  ['$http', 'Filters', 'Products', function(
       scrollActive = false;
       currentPage += 1;
       
-      $http.get('http://localhost:3000/products.json', {params: {page: currentPage.toString(), gender: this.filters.gender}}).success(function(data){
+      $http.get('http://localhost:3000/products.json', {params: {page: currentPage.toString(), gender: this.filters.gender, category: this.filters.category}}).success(function(data){
         productCtrl.products.addProducts(data);
         scrollActive = true;
       });
@@ -83,6 +83,21 @@ app.controller('SubNavController', ['Filters', 'Products', function(Filters, Pro
     } else if ( gender === "womens") {
       Filters.gender = "female";
     }
+    Products.resetProducts();
+    Products.fetchProducts();
+  };
+}]);
+
+app.controller('CategoryController', ['Filters', 'Products', '$http', function(Filters, Products, $http){
+  var categoryCtrl = this;
+  categoryCtrl.categories = [];
+  var categories = this.categories;
+  $http.get('http://localhost:3000/categories.json').success(function(data){
+    categoryCtrl.categories = data;
+  });
+
+  this.setCategory = function(cat_id){
+    Filters.category = cat_id;
     Products.resetProducts();
     Products.fetchProducts();
   };

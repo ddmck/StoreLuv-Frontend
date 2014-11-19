@@ -27,6 +27,14 @@
   </dl>
 </div>
 
+<div class="category-container row" ng-controller="CategoryController as CategoryCtrl">
+  <ul class="small-block-grid-2 medium-block-grid-4 large-block-grid-6">
+    <li ng-repeat="category in CategoryCtrl.categories">
+      <a ng-click="CategoryCtrl.setCategory(category.id)" class="label">{{category.name}}</a>
+    </li>
+  </ul>
+</div>
+
 <div class="row" ng-controller="ProductsController as products" infinite-scroll="products.nextPage(products.products)" infinite-scroll-distance="3" infinite-scroll-immediate-check='{{ products.scrollActive }}'>
   <ul class="small-block-grid-1 medium-block-grid-2 large-block-grid-4" >
     <li ng-repeat="product in products.products.getProducts() track by $index" >
