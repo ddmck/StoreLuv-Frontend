@@ -16,6 +16,7 @@ module.exports =
       resolve('modernizr'),
       resolve('foundation.min'),
       resolve('placeholder'),
-      resolve('ng-infinite-scroll')
+      resolve('ng-infinite-scroll'),
+      resolve('lodash.min')
     ]
   }

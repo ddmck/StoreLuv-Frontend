@@ -10,6 +10,10 @@ var autoprefixer = require('gulp-autoprefixer');
 var stdlib = require('./stdlib');
 var plumber = require('gulp-plumber');
 var gutil = require('gulp-util');
+var s3 = require("gulp-s3");
+var fs = require('fs');
+var aws = JSON.parse(fs.readFileSync('./aws.json'));
+
 
 var onError = function (err) {
   gutil.beep();
@@ -85,6 +89,11 @@ gulp.task('connect', function() {
     },
     port: 8000
   });
+});
+
+gulp.task('deploy', function(){
+  gulp.src('./build/**')
+    .pipe(s3(aws, {headers: {'Cache-Control': 'max-age=315360000, no-transform, public'}}));
 });
 
 gulp.task('default', ['connect', 'watch']);

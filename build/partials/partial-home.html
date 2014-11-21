@@ -27,12 +27,29 @@
   </dl>
 </div>
 
-<div class="category-container row" ng-controller="CategoryController as CategoryCtrl">
+<div class="category-container row hide" ng-controller="CategoryController as CategoryCtrl">
   <ul class="small-block-grid-2 medium-block-grid-4 large-block-grid-6">
-    <li ng-repeat="category in CategoryCtrl.categories">
+    <li ng-repeat="category in CategoryCtrl.categories.list()">
       <a ng-click="CategoryCtrl.setCategory(category.id)" class="label">{{category.name}}</a>
     </li>
   </ul>
+</div>
+
+<div class="search-container" ng-controller="SearchController as SearchCtrl">
+  <form ng-submit="SearchCtrl.updateSearch(searchString)">
+    <div class="large-12 columns">
+      <div class="row collapse">
+        <div class="small-10 columns">
+          <input type="search" ng-model="searchString" ng-change="SearchCtrl.findCat(searchString)">
+        </div>
+        <div class="small-2 columns">
+          <input class="button postfix" type="submit">
+        </div>
+      </div>
+    </div>
+    
+    
+  </form>
 </div>
 
 <div class="row" ng-controller="ProductsController as products" infinite-scroll="products.nextPage(products.products)" infinite-scroll-distance="3" infinite-scroll-immediate-check='{{ products.scrollActive }}'>

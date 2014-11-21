@@ -1,43 +1,47 @@
-var app = angular.module('App', ['ui.router', 'infinite-scroll']);
-
-app.config(function($stateProvider, $urlRouterProvider) {
-    
-  $urlRouterProvider.otherwise('/home');
-  
-  $stateProvider
-      
-    // HOME STATES AND NESTED VIEWS ========================================
-    .state('home', {
-        url: '/home',
-        templateUrl: 'partials/partial-home.html'
-    })
-    
-    // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
-    .state('about', {
-        // we'll get to this in a bit       
-    });
-  
-
-});
+var app = angular.module('App', ['infinite-scroll'])
 
 app.factory('Filters', function(){
   return {};
 });
 
+app.factory('Categories', [ '$http', function($http){
+  var categories = [];
+  return {
+    fetchCategories: function(){
+      $http.get('categories.json').success(function(data){
+        categories = data;
+      });
+    },
+    list: function(){
+      return categories;
+    }
+  }
+}]);
+
 app.factory('Products', ['$http', 'Filters', function($http, Filters){
   var products = [];
+  var page = 1;
   return {
     getProducts: function(){
       return products;
     },
+    currentPage: function(){
+      return page;
+    },
+    enumeratePage: function(){
+      page += 1;
+    },
     resetProducts: function(){
       products = [];
+    },
+    resetPage: function(){
+      page = 1;
     },
     addProducts: function(newProducts){
       products = products.concat(newProducts);
     },
     fetchProducts: function(){
-      $http.get('http://localhost:3000/products.json', {params: {page: "1", gender: Filters.gender, category: Filters.category}}).success(function(data){
+      $http.get('products.json', {params: {page: page.toString(), gender: Filters.gender, category: Filters.category, search_string: Filters.searchString}}).success(function(data){
         products = products.concat(data);
         scrollActive = true;
       });
@@ -52,9 +56,14 @@ app.controller('ProductsController',  ['$http', 'Filters', 'Products', function(
   productCtrl.products = Products;
 
   this.filters = Filters;
-  var currentPage = 1;
+  
 
-  $http.get('http://localhost:3000/products.json', {params: {page: currentPage.toString(), gender: this.filters.gender, category: this.filters.category}}).success(function(data){
+  $http.get('products.json', {params: { 
+                                                              page: Products.currentPage().toString(), 
+                                                              gender: this.filters.gender, 
+                                                              category: this.filters.category, 
+                                                              search_string: Filters.searchString}
+                                                            }).success(function(data){
     productCtrl.products.addProducts(data);
     scrollActive = true;
   });
@@ -66,9 +75,9 @@ app.controller('ProductsController',  ['$http', 'Filters', 'Products', function(
   this.nextPage = function(products){
     if (scrollActive === true) {
       scrollActive = false;
-      currentPage += 1;
+      Products.enumeratePage();
       
-      $http.get('http://localhost:3000/products.json', {params: {page: currentPage.toString(), gender: this.filters.gender, category: this.filters.category}}).success(function(data){
+      $http.get('products.json', {params: {page: Products.currentPage().toString(), gender: this.filters.gender, category: this.filters.category, search_string: Filters.searchString}}).success(function(data){
         productCtrl.products.addProducts(data);
         scrollActive = true;
       });
@@ -88,17 +97,44 @@ app.controller('SubNavController', ['Filters', 'Products', function(Filters, Pro
   };
 }]);
 
-app.controller('CategoryController', ['Filters', 'Products', '$http', function(Filters, Products, $http){
+app.controller('CategoryController', ['Filters', 'Products', 'Categories', function(Filters, Products, Categories){
   var categoryCtrl = this;
   categoryCtrl.categories = [];
-  var categories = this.categories;
-  $http.get('http://localhost:3000/categories.json').success(function(data){
-    categoryCtrl.categories = data;
-  });
+  Categories.fetchCategories();
+  categoryCtrl.categories = Categories;
 
   this.setCategory = function(cat_id){
     Filters.category = cat_id;
     Products.resetProducts();
+    Products.resetPage();
     Products.fetchProducts();
   };
 }]);
+
+app.controller('SearchController', ['Filters', 'Products', 'Categories', function(Filters, Products, Categories){
+  this.updateSearch = function(searchString){
+    console.log(searchString);
+    Filters.searchString = searchString;
+    Products.resetProducts();
+    Products.resetPage();
+    Products.fetchProducts();  
+  }
+
+  this.findCat = function(searchString){
+    Filters.category = null;
+    var words = searchString.toLowerCase().split(" ");
+    _(words).forEach(function(word){
+      _(Categories.list()).forEach(function(category){
+        if (category.name === word){
+          Filters.category = category.id;
+        }
+      });
+    });
+    console.log(Filters);
+  };
+
+}]);
+
+
+
+

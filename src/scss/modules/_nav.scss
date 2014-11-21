@@ -11,5 +11,17 @@
   dl.sub-nav {
     line-height: $sub-nav-height;
     // padding-top: 0px;
+
+    dd.category-select div select {
+      background: none;
+      border: none;
+      color: $off-white;
+      font-family: $header-font-family;
+      height: 45px;
+      font-size: 1.125rem;
+      &:focus {
+        outline: none;
+      }
+    }
   }
 }
