@@ -9,6 +9,9 @@
   background-position: center;
   background-color: white;
   box-shadow: 0px 2px 5px 0px rgba(39,39,39,0.5);
+  @media only screen and (max-width: 64.063em) {
+    margin-bottom: 60px;
+  }
 
   .product-description {
     position: absolute;
@@ -17,8 +20,10 @@
     bottom: 0;
     background: rgba($dark-grey, 0.5);
     color: $white;
-    @media only screen and (min-width: 64.063em) {
+    @media only screen and (max-width: 64.063em) {
       transition: bottom 0.25s linear, background 0.25s linear;
+      bottom: -60px;
+      background: $dark-grey;
     }
     
 

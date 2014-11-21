@@ -5913,6 +5913,9 @@ th.hide-for-touch {
   background-color: white;
   -webkit-box-shadow: 0px 2px 5px 0px rgba(39, 39, 39, 0.5);
           box-shadow: 0px 2px 5px 0px rgba(39, 39, 39, 0.5); }
+  @media only screen and (max-width: 64.063em) {
+    .product-container {
+      margin-bottom: 60px; } }
   .product-container .product-description {
     position: absolute;
     height: 60px;
@@ -5920,10 +5923,12 @@ th.hide-for-touch {
     bottom: 0;
     background: rgba(39, 39, 39, 0.5);
     color: #FFFFFF; }
-    @media only screen and (min-width: 64.063em) {
+    @media only screen and (max-width: 64.063em) {
       .product-container .product-description {
         -webkit-transition: bottom 0.25s linear, background 0.25s linear;
-                transition: bottom 0.25s linear, background 0.25s linear; } }
+                transition: bottom 0.25s linear, background 0.25s linear;
+        bottom: -60px;
+        background: #272727; } }
     .product-container .product-description .product-brand {
       position: absolute;
       top: 10px;
