@@ -6020,8 +6020,10 @@ th.hide-for-touch {
 
 html {
   -webkit-font-smoothing: antialiased;
-  width: 100%;
   overflow-x: hidden; }
 
 body {
   overflow-x: hidden; }
+
+* {
+  -webkit-overflow-scrolling: touch; }
