@@ -6018,5 +6018,7 @@ th.hide-for-touch {
       -webkit-transition: bottom 0.25s linear, background 0.25s linear;
               transition: bottom 0.25s linear, background 0.25s linear; } }
 
-html {
-  -webkit-font-smoothing: antialiased; }
+html, body {
+  -webkit-font-smoothing: antialiased;
+  width: 100%;
+  overflow-x: hidden; }
