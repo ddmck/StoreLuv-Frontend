@@ -6,8 +6,12 @@
 @import "modules/_nav";
 @import "modules/_products";
 
-html, body {
+html {
   -webkit-font-smoothing: antialiased;
   width: 100%;
+  overflow-x: hidden;
+}
+
+body {
   overflow-x: hidden;
 }
