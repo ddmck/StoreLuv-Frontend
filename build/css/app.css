@@ -6018,9 +6018,17 @@ th.hide-for-touch {
       -webkit-transition: bottom 0.25s linear, background 0.25s linear;
               transition: bottom 0.25s linear, background 0.25s linear; } }
 
+@media only screen and (max-width: 64.063em) {
+  .products-row {
+    padding-left: 10px;
+    padding-right: 10px; } }
+
 html {
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden; }
 
 body {
   overflow-x: hidden; }
+
+* {
+  -webkit-overflow-scrolling: touch; }
