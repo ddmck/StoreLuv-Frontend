@@ -17,6 +17,7 @@ module.exports =
       resolve('foundation.min'),
       resolve('placeholder'),
       resolve('ng-infinite-scroll'),
-      resolve('lodash.min')
+      resolve('lodash.min'),
+      resolve('google-analytics')
     ]
   }
