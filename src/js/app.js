@@ -130,12 +130,19 @@ app.controller('SearchController', ['Filters', 'Products', 'Categories', functio
     Filters.category = null;
     var words = searchString.toLowerCase().split(" ");
     _(words).forEach(function(word){
-      _(Categories.list()).forEach(function(category){
-        if (category.name === word){
-          Filters.category = category.id;
-        }
-      });
+      if (Filters.category === null) {
+        _(Categories.list()).forEach(function(category){
+          if (Filters.category === null) {
+            if (category.name === word){
+              Filters.category = category.id;
+            } else if (category.name.substring(0, category.name.length - 1) === word) {
+              Filters.category = category.id;
+            }
+          }
+        });
+      }
     });
+    
   };
 
 }]);

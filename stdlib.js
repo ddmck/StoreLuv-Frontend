@@ -10,15 +10,13 @@ module.exports =
       resolve('angular.min'),
       resolve('angular-ui-router.min'),
       resolve('angular-sanitize'),
-
       resolve('fastclick'),
-
-
       resolve('modernizr'),
       resolve('foundation.min'),
       resolve('placeholder'),
       resolve('ng-infinite-scroll'),
       resolve('lodash.min'),
+      resolve('inflection.min'),
       resolve('google-analytics')
     ]
   }
