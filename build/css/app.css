@@ -5930,6 +5930,7 @@ th.hide-for-touch {
         bottom: -60px;
         background: #272727; } }
     .product-container .product-description .product-brand {
+      text-transform: capitalize;
       position: absolute;
       top: 10px;
       left: 0;
@@ -5943,6 +5944,7 @@ th.hide-for-touch {
       white-space: nowrap;
       overflow: hidden; }
     .product-container .product-description .product-name {
+      text-transform: capitalize;
       position: absolute;
       top: 38px;
       left: 0;
@@ -6026,9 +6028,25 @@ th.hide-for-touch {
     -webkit-box-shadow: 0px 2px 5px 0px rgba(39, 39, 39, 0.5);
             box-shadow: 0px 2px 5px 0px rgba(39, 39, 39, 0.5); } }
 
+.load {
+  padding-top: 100px;
+  padding-bottom: 100px;
+  text-align: center; }
+  .load .fa-spin {
+    color: #8C0343; }
+  .load .fa-spin.fa-stack-1x {
+    -webkit-animation: fa-spin 1.5s infinite linear;
+            animation: fa-spin 1.5s infinite linear; }
+
+.no-results {
+  padding-top: 100px;
+  padding-bottom: 100px;
+  text-align: center; }
+  .no-results .fa {
+    color: #8C0343; }
+
 html {
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden; }
+  -webkit-font-smoothing: antialiased; }
 
 body {
   overflow-x: hidden; }

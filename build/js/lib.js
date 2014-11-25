@@ -291,6 +291,685 @@ Ud=da({restrict:"E",terminal:!1});T.angular.bootstrap?console.log("WARNING: Trie
 "undefined"!=typeof module&&"undefined"!=typeof exports&&module.exports===exports&&(module.exports="ui.router"),function(a,b,c){"use strict";function d(a,b){return J(new(J(function(){},{prototype:a})),b)}function e(a){return I(arguments,function(b){b!==a&&I(b,function(b,c){a.hasOwnProperty(c)||(a[c]=b)})}),a}function f(a,b){var c=[];for(var d in a.path){if(a.path[d]!==b.path[d])break;c.push(a.path[d])}return c}function g(a){if(Object.keys)return Object.keys(a);var c=[];return b.forEach(a,function(a,b){c.push(b)}),c}function h(a,b){if(Array.prototype.indexOf)return a.indexOf(b,Number(arguments[2])||0);var c=a.length>>>0,d=Number(arguments[2])||0;for(d=0>d?Math.ceil(d):Math.floor(d),0>d&&(d+=c);c>d;d++)if(d in a&&a[d]===b)return d;return-1}function i(a,b,c,d){var e,i=f(c,d),j={},k=[];for(var l in i)if(i[l].params&&(e=g(i[l].params),e.length))for(var m in e)h(k,e[m])>=0||(k.push(e[m]),j[e[m]]=a[e[m]]);return J({},j,b)}function j(a,b,c){if(!c){c=[];for(var d in a)c.push(d)}for(var e=0;e<c.length;e++){var f=c[e];if(a[f]!=b[f])return!1}return!0}function k(a,b){var c={};return I(a,function(a){c[a]=b[a]}),c}function l(a,b){var d=1,f=2,g={},h=[],i=g,j=J(a.when(g),{$$promises:g,$$values:g});this.study=function(g){function k(a,c){if(o[c]!==f){if(n.push(c),o[c]===d)throw n.splice(0,n.indexOf(c)),new Error("Cyclic dependency: "+n.join(" -> "));if(o[c]=d,F(a))m.push(c,[function(){return b.get(a)}],h);else{var e=b.annotate(a);I(e,function(a){a!==c&&g.hasOwnProperty(a)&&k(g[a],a)}),m.push(c,a,e)}n.pop(),o[c]=f}}function l(a){return G(a)&&a.then&&a.$$promises}if(!G(g))throw new Error("'invocables' must be an object");var m=[],n=[],o={};return I(g,k),g=n=o=null,function(d,f,g){function h(){--s||(t||e(r,f.$$values),p.$$values=r,p.$$promises=!0,delete p.$$inheritedValues,o.resolve(r))}function k(a){p.$$failure=a,o.reject(a)}function n(c,e,f){function i(a){l.reject(a),k(a)}function j(){if(!D(p.$$failure))try{l.resolve(b.invoke(e,g,r)),l.promise.then(function(a){r[c]=a,h()},i)}catch(a){i(a)}}var l=a.defer(),m=0;I(f,function(a){q.hasOwnProperty(a)&&!d.hasOwnProperty(a)&&(m++,q[a].then(function(b){r[a]=b,--m||j()},i))}),m||j(),q[c]=l.promise}if(l(d)&&g===c&&(g=f,f=d,d=null),d){if(!G(d))throw new Error("'locals' must be an object")}else d=i;if(f){if(!l(f))throw new Error("'parent' must be a promise returned by $resolve.resolve()")}else f=j;var o=a.defer(),p=o.promise,q=p.$$promises={},r=J({},d),s=1+m.length/3,t=!1;if(D(f.$$failure))return k(f.$$failure),p;f.$$inheritedValues&&e(r,f.$$inheritedValues),f.$$values?(t=e(r,f.$$values),p.$$inheritedValues=f.$$values,h()):(f.$$inheritedValues&&(p.$$inheritedValues=f.$$inheritedValues),J(q,f.$$promises),f.then(h,k));for(var u=0,v=m.length;v>u;u+=3)d.hasOwnProperty(m[u])?h():n(m[u],m[u+1],m[u+2]);return p}},this.resolve=function(a,b,c,d){return this.study(a)(b,c,d)}}function m(a,b,c){this.fromConfig=function(a,b,c){return D(a.template)?this.fromString(a.template,b):D(a.templateUrl)?this.fromUrl(a.templateUrl,b):D(a.templateProvider)?this.fromProvider(a.templateProvider,b,c):null},this.fromString=function(a,b){return E(a)?a(b):a},this.fromUrl=function(c,d){return E(c)&&(c=c(d)),null==c?null:a.get(c,{cache:b}).then(function(a){return a.data})},this.fromProvider=function(a,b,d){return c.invoke(a,null,d||{params:b})}}function n(a,d){function e(a){return D(a)?this.type.decode(a):p.$$getDefaultValue(this)}function f(b,c,d){if(!/^\w+(-+\w+)*$/.test(b))throw new Error("Invalid parameter name '"+b+"' in pattern '"+a+"'");if(n[b])throw new Error("Duplicate parameter name '"+b+"' in pattern '"+a+"'");n[b]=J({type:c||new o,$value:e},d)}function g(a,b,c){var d=a.replace(/[\\\[\]\^$*+?.()|{}]/g,"\\$&");if(!b)return d;var e=c?"?":"";return d+e+"("+b+")"+e}function h(a){if(!d.params||!d.params[a])return{};var b=d.params[a];return G(b)?b:{value:b}}d=b.isObject(d)?d:{};var i,j=/([:*])(\w+)|\{(\w+)(?:\:((?:[^{}\\]+|\\.|\{(?:[^{}\\]+|\\.)*\})+))?\}/g,k="^",l=0,m=this.segments=[],n=this.params={};this.source=a;for(var q,r,s,t,u;(i=j.exec(a))&&(q=i[2]||i[3],r=i[4]||("*"==i[1]?".*":"[^/]*"),s=a.substring(l,i.index),t=this.$types[r]||new o({pattern:new RegExp(r)}),u=h(q),!(s.indexOf("?")>=0));)k+=g(s,t.$subPattern(),D(u.value)),f(q,t,u),m.push(s),l=j.lastIndex;s=a.substring(l);var v=s.indexOf("?");if(v>=0){var w=this.sourceSearch=s.substring(v);s=s.substring(0,v),this.sourcePath=a.substring(0,l+v),I(w.substring(1).split(/[&?]/),function(a){f(a,null,h(a))})}else this.sourcePath=a,this.sourceSearch="";k+=g(s)+(d.strict===!1?"/?":"")+"$",m.push(s),this.regexp=new RegExp(k,d.caseInsensitive?"i":c),this.prefix=m[0]}function o(a){J(this,a)}function p(){function a(){return{strict:f,caseInsensitive:e}}function b(a){return E(a)||H(a)&&E(a[a.length-1])}function c(){I(h,function(a){if(n.prototype.$types[a.name])throw new Error("A type named '"+a.name+"' has already been defined.");var c=new o(b(a.def)?d.invoke(a.def):a.def);n.prototype.$types[a.name]=c})}var d,e=!1,f=!0,g=!0,h=[],i={"int":{decode:function(a){return parseInt(a,10)},is:function(a){return D(a)?this.decode(a.toString())===a:!1},pattern:/\d+/},bool:{encode:function(a){return a?1:0},decode:function(a){return 0===parseInt(a,10)?!1:!0},is:function(a){return a===!0||a===!1},pattern:/0|1/},string:{pattern:/[^\/]*/},date:{equals:function(a,b){return a.toISOString()===b.toISOString()},decode:function(a){return new Date(a)},encode:function(a){return[a.getFullYear(),("0"+(a.getMonth()+1)).slice(-2),("0"+a.getDate()).slice(-2)].join("-")},pattern:/[0-9]{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[1-2][0-9]|3[0-1])/}};p.$$getDefaultValue=function(a){if(!b(a.value))return a.value;if(!d)throw new Error("Injectable functions cannot be called at configuration time");return d.invoke(a.value)},this.caseInsensitive=function(a){e=a},this.strictMode=function(a){f=a},this.compile=function(b,c){return new n(b,J(a(),c))},this.isMatcher=function(a){if(!G(a))return!1;var b=!0;return I(n.prototype,function(c,d){E(c)&&(b=b&&D(a[d])&&E(a[d]))}),b},this.type=function(a,b){return D(b)?(h.push({name:a,def:b}),g||c(),this):n.prototype.$types[a]},this.$get=["$injector",function(a){return d=a,g=!1,n.prototype.$types={},c(),I(i,function(a,b){n.prototype.$types[b]||(n.prototype.$types[b]=new o(a))}),this}]}function q(a,b){function d(a){var b=/^\^((?:\\[^a-zA-Z0-9]|[^\\\[\]\^$*+?.()|{}]+)*)/.exec(a.source);return null!=b?b[1].replace(/\\(.)/g,"$1"):""}function e(a,b){return a.replace(/\$(\$|\d{1,2})/,function(a,c){return b["$"===c?0:Number(c)]})}function f(a,b,c){if(!c)return!1;var d=a.invoke(b,b,{$match:c});return D(d)?d:!0}function g(b,c,d,e){function f(a,b,c){return"/"===m?a:b?m.slice(0,-1)+a:c?m.slice(1)+a:a}function g(a){function c(a){var c=a(d,b);return c?(F(c)&&b.replace().url(c),!0):!1}if(!a||!a.defaultPrevented){var e,f=i.length;for(e=0;f>e;e++)if(c(i[e]))return;j&&c(j)}}function l(){return h=h||c.$on("$locationChangeSuccess",g)}var m=e.baseHref(),n=b.url();return k||l(),{sync:function(){g()},listen:function(){return l()},update:function(a){return a?void(n=b.url()):void(b.url()!==n&&(b.url(n),b.replace()))},push:function(a,c,d){b.url(a.format(c||{})),d&&d.replace&&b.replace()},href:function(c,d,e){if(!c.validates(d))return null;var g=a.html5Mode(),h=c.format(d);if(e=e||{},g||null===h||(h="#"+a.hashPrefix()+h),h=f(h,g,e.absolute),!e.absolute||!h)return h;var i=!g&&h?"/":"",j=b.port();return j=80===j||443===j?"":":"+j,[b.protocol(),"://",b.host(),j,i,h].join("")}}}var h,i=[],j=null,k=!1;this.rule=function(a){if(!E(a))throw new Error("'rule' must be a function");return i.push(a),this},this.otherwise=function(a){if(F(a)){var b=a;a=function(){return b}}else if(!E(a))throw new Error("'rule' must be a function");return j=a,this},this.when=function(a,c){var g,h=F(c);if(F(a)&&(a=b.compile(a)),!h&&!E(c)&&!H(c))throw new Error("invalid 'handler' in when()");var i={matcher:function(a,c){return h&&(g=b.compile(c),c=["$match",function(a){return g.format(a)}]),J(function(b,d){return f(b,c,a.exec(d.path(),d.search()))},{prefix:F(a.prefix)?a.prefix:""})},regex:function(a,b){if(a.global||a.sticky)throw new Error("when() RegExp must not be global or sticky");return h&&(g=b,b=["$match",function(a){return e(g,a)}]),J(function(c,d){return f(c,b,a.exec(d.path()))},{prefix:d(a)})}},j={matcher:b.isMatcher(a),regex:a instanceof RegExp};for(var k in j)if(j[k])return this.rule(i[k](a,c));throw new Error("invalid 'what' in when()")},this.deferIntercept=function(a){a===c&&(a=!0),k=a},this.$get=g,g.$inject=["$location","$rootScope","$injector","$browser"]}function r(a,e){function f(a){return 0===a.indexOf(".")||0===a.indexOf("^")}function h(a,b){if(!a)return c;var d=F(a),e=d?a:a.name,g=f(e);if(g){if(!b)throw new Error("No reference point given for path '"+e+"'");for(var h=e.split("."),i=0,j=h.length,k=b;j>i;i++)if(""!==h[i]||0!==i){if("^"!==h[i])break;if(!k.parent)throw new Error("Path '"+e+"' not valid for state '"+b.name+"'");k=k.parent}else k=b;h=h.slice(i).join("."),e=k.name+(k.name&&h?".":"")+h}var l=v[e];return!l||!d&&(d||l!==a&&l.self!==a)?c:l}function l(a,b){w[a]||(w[a]=[]),w[a].push(b)}function m(b){b=d(b,{self:b,resolve:b.resolve||{},toString:function(){return this.name}});var c=b.name;if(!F(c)||c.indexOf("@")>=0)throw new Error("State must have a valid name");if(v.hasOwnProperty(c))throw new Error("State '"+c+"'' is already defined");var e=-1!==c.indexOf(".")?c.substring(0,c.lastIndexOf(".")):F(b.parent)?b.parent:"";if(e&&!v[e])return l(e,b.self);for(var f in y)E(y[f])&&(b[f]=y[f](b,y.$delegates[f]));if(v[c]=b,!b[x]&&b.url&&a.when(b.url,["$match","$stateParams",function(a,c){u.$current.navigable==b&&j(a,c)||u.transitionTo(b,a,{location:!1})}]),w[c])for(var g=0;g<w[c].length;g++)m(w[c][g]);return b}function n(a){return a.indexOf("*")>-1}function o(a){var b=a.split("."),c=u.$current.name.split(".");if("**"===b[0]&&(c=c.slice(c.indexOf(b[1])),c.unshift("**")),"**"===b[b.length-1]&&(c.splice(c.indexOf(b[b.length-2])+1,Number.MAX_VALUE),c.push("**")),b.length!=c.length)return!1;for(var d=0,e=b.length;e>d;d++)"*"===b[d]&&(c[d]="*");return c.join("")===b.join("")}function p(a,b){return F(a)&&!D(b)?y[a]:E(b)&&F(a)?(y[a]&&!y.$delegates[a]&&(y.$delegates[a]=y[a]),y[a]=b,this):this}function q(a,b){return G(a)?b=a:b.name=a,m(b),this}function r(a,e,f,l,m,p,q){function r(b,c,d,f){var g=a.$broadcast("$stateNotFound",b,c,d);if(g.defaultPrevented)return q.update(),A;if(!g.retry)return null;if(f.$retry)return q.update(),B;var h=u.transition=e.when(g.retry);return h.then(function(){return h!==u.transition?y:(b.options.$retry=!0,u.transitionTo(b.to,b.toParams,b.options))},function(){return A}),q.update(),h}function w(a,c,d,h,i){var j=d?c:k(g(a.params),c),n={$stateParams:j};i.resolve=m.resolve(a.resolve,n,i.resolve,a);var o=[i.resolve.then(function(a){i.globals=a})];return h&&o.push(h),I(a.views,function(c,d){var e=c.resolve&&c.resolve!==a.resolve?c.resolve:{};e.$template=[function(){return f.load(d,{view:c,locals:n,params:j})||""}],o.push(m.resolve(e,n,i.resolve,a).then(function(f){if(E(c.controllerProvider)||H(c.controllerProvider)){var g=b.extend({},e,n);f.$$controller=l.invoke(c.controllerProvider,null,g)}else f.$$controller=c.controller;f.$$state=a,f.$$controllerAs=c.controllerAs,i[d]=f}))}),e.all(o).then(function(){return i})}var y=e.reject(new Error("transition superseded")),z=e.reject(new Error("transition prevented")),A=e.reject(new Error("transition aborted")),B=e.reject(new Error("transition failed"));return t.locals={resolve:null,globals:{$stateParams:{}}},u={params:{},current:t.self,$current:t,transition:null},u.reload=function(){u.transitionTo(u.current,p,{reload:!0,inherit:!1,notify:!1})},u.go=function(a,b,c){return u.transitionTo(a,b,J({inherit:!0,relative:u.$current},c))},u.transitionTo=function(b,c,f){c=c||{},f=J({location:!0,inherit:!1,relative:null,notify:!0,reload:!1,$retry:!1},f||{});var m,n=u.$current,o=u.params,v=n.path,A=h(b,f.relative);if(!D(A)){var B={to:b,toParams:c,options:f},C=r(B,n.self,o,f);if(C)return C;if(b=B.to,c=B.toParams,f=B.options,A=h(b,f.relative),!D(A)){if(!f.relative)throw new Error("No such state '"+b+"'");throw new Error("Could not resolve '"+b+"' from state '"+f.relative+"'")}}if(A[x])throw new Error("Cannot transition to abstract state '"+b+"'");f.inherit&&(c=i(p,c||{},u.$current,A)),b=A;var E=b.path,F=0,G=E[F],H=t.locals,I=[];if(!f.reload)for(;G&&G===v[F]&&j(c,o,G.ownParams);)H=I[F]=G.locals,F++,G=E[F];if(s(b,n,H,f))return b.self.reloadOnSearch!==!1&&q.update(),u.transition=null,e.when(u.current);if(c=k(g(b.params),c||{}),f.notify&&a.$broadcast("$stateChangeStart",b.self,c,n.self,o).defaultPrevented)return q.update(),z;for(var L=e.when(H),M=F;M<E.length;M++,G=E[M])H=I[M]=d(H),L=w(G,c,G===b,L,H);var N=u.transition=L.then(function(){var d,e,g;if(u.transition!==N)return y;for(d=v.length-1;d>=F;d--)g=v[d],g.self.onExit&&l.invoke(g.self.onExit,g.self,g.locals.globals),g.locals=null;for(d=F;d<E.length;d++)e=E[d],e.locals=I[d],e.self.onEnter&&l.invoke(e.self.onEnter,e.self,e.locals.globals);return u.transition!==N?y:(u.$current=b,u.current=b.self,u.params=c,K(u.params,p),u.transition=null,f.location&&b.navigable&&q.push(b.navigable.url,b.navigable.locals.globals.$stateParams,{replace:"replace"===f.location}),f.notify&&a.$broadcast("$stateChangeSuccess",b.self,c,n.self,o),q.update(!0),u.current)},function(d){return u.transition!==N?y:(u.transition=null,m=a.$broadcast("$stateChangeError",b.self,c,n.self,o,d),m.defaultPrevented||q.update(),e.reject(d))});return N},u.is=function(a,d){var e=h(a);return D(e)?u.$current!==e?!1:D(d)&&null!==d?b.equals(p,d):!0:c},u.includes=function(a,b){if(F(a)&&n(a)){if(!o(a))return!1;a=u.$current.name}var d=h(a);return D(d)?D(u.$current.includes[d.name])?j(b,p):!1:c},u.href=function(a,b,c){c=J({lossy:!0,inherit:!0,absolute:!1,relative:u.$current},c||{});var d=h(a,c.relative);if(!D(d))return null;c.inherit&&(b=i(p,b||{},u.$current,d));var e=d&&c.lossy?d.navigable:d;return e&&e.url?q.href(e.url,k(g(d.params),b||{}),{absolute:c.absolute}):null},u.get=function(a,b){if(0===arguments.length)return g(v).map(function(a){return v[a].self});var c=h(a,b);return c&&c.self?c.self:null},u}function s(a,b,c,d){return a!==b||(c!==b.locals||d.reload)&&a.self.reloadOnSearch!==!1?void 0:!0}var t,u,v={},w={},x="abstract",y={parent:function(a){if(D(a.parent)&&a.parent)return h(a.parent);var b=/^(.+)\.[^.]+$/.exec(a.name);return b?h(b[1]):t},data:function(a){return a.parent&&a.parent.data&&(a.data=a.self.data=J({},a.parent.data,a.data)),a.data},url:function(a){var b=a.url,c={params:a.params||{}};if(F(b))return"^"==b.charAt(0)?e.compile(b.substring(1),c):(a.parent.navigable||t).url.concat(b,c);if(!b||e.isMatcher(b))return b;throw new Error("Invalid url '"+b+"' in state '"+a+"'")},navigable:function(a){return a.url?a:a.parent?a.parent.navigable:null},params:function(a){return a.params?a.params:a.url?a.url.params:a.parent.params},views:function(a){var b={};return I(D(a.views)?a.views:{"":a},function(c,d){d.indexOf("@")<0&&(d+="@"+a.parent.name),b[d]=c}),b},ownParams:function(a){if(a.params=a.params||{},!a.parent)return g(a.params);var b={};I(a.params,function(a,c){b[c]=!0}),I(a.parent.params,function(c,d){if(!b[d])throw new Error("Missing required parameter '"+d+"' in state '"+a.name+"'");b[d]=!1});var c=[];return I(b,function(a,b){a&&c.push(b)}),c},path:function(a){return a.parent?a.parent.path.concat(a):[]},includes:function(a){var b=a.parent?J({},a.parent.includes):{};return b[a.name]=!0,b},$delegates:{}};t=m({name:"",url:"^",views:null,"abstract":!0}),t.navigable=null,this.decorator=p,this.state=q,this.$get=r,r.$inject=["$rootScope","$q","$view","$injector","$resolve","$stateParams","$urlRouter"]}function s(){function a(a,b){return{load:function(c,d){var e,f={template:null,controller:null,view:null,locals:null,notify:!0,async:!0,params:{}};return d=J(f,d),d.view&&(e=b.fromConfig(d.view,d.params,d.locals)),e&&d.notify&&a.$broadcast("$viewContentLoading",d),e}}}this.$get=a,a.$inject=["$rootScope","$templateFactory"]}function t(){var a=!1;this.useAnchorScroll=function(){a=!0},this.$get=["$anchorScroll","$timeout",function(b,c){return a?b:function(a){c(function(){a[0].scrollIntoView()},0,!1)}}]}function u(a,c,d){function e(){return c.has?function(a){return c.has(a)?c.get(a):null}:function(a){try{return c.get(a)}catch(b){return null}}}function f(a,b){var c=function(){return{enter:function(a,b,c){b.after(a),c()},leave:function(a,b){a.remove(),b()}}};if(i)return{enter:function(a,b,c){i.enter(a,null,b,c)},leave:function(a,b){i.leave(a,b)}};if(h){var d=h&&h(b,a);return{enter:function(a,b,c){d.enter(a,null,b),c()},leave:function(a,b){d.leave(a),b()}}}return c()}var g=e(),h=g("$animator"),i=g("$animate"),j={restrict:"ECA",terminal:!0,priority:400,transclude:"element",compile:function(c,e,g){return function(c,e,h){function i(){k&&(k.remove(),k=null),m&&(m.$destroy(),m=null),l&&(q.leave(l,function(){k=null}),k=l,l=null)}function j(f){var j,k=w(h,e.inheritedData("$uiView")),r=k&&a.$current&&a.$current.locals[k];if(f||r!==n){j=c.$new(),n=a.$current.locals[k];var s=g(j,function(a){q.enter(a,e,function(){(b.isDefined(p)&&!p||c.$eval(p))&&d(a)}),i()});l=s,m=j,m.$emit("$viewContentLoaded"),m.$eval(o)}}var k,l,m,n,o=h.onload||"",p=h.autoscroll,q=f(h,c);c.$on("$stateChangeSuccess",function(){j(!1)}),c.$on("$viewContentLoading",function(){j(!1)}),j(!0)}}};return j}function v(a,b,c){return{restrict:"ECA",priority:-400,compile:function(d){var e=d.html();return function(d,f,g){var h=c.$current,i=w(g,f.inheritedData("$uiView")),j=h&&h.locals[i];if(j){f.data("$uiView",{name:i,state:j.$$state}),f.html(j.$template?j.$template:e);var k=a(f.contents());if(j.$$controller){j.$scope=d;var l=b(j.$$controller,j);j.$$controllerAs&&(d[j.$$controllerAs]=l),f.data("$ngControllerController",l),f.children().data("$ngControllerController",l)}k(d)}}}}}function w(a,b){var c=a.uiView||a.name||"";return c.indexOf("@")>=0?c:c+"@"+(b?b.state.name:"")}function x(a,b){var c,d=a.match(/^\s*({[^}]*})\s*$/);if(d&&(a=b+"("+d[1]+")"),c=a.replace(/\n/g," ").match(/^([^(]+?)\s*(\((.*)\))?$/),!c||4!==c.length)throw new Error("Invalid state ref '"+a+"'");return{state:c[1],paramExpr:c[3]||null}}function y(a){var b=a.parent().inheritedData("$uiView");return b&&b.state&&b.state.name?b.state:void 0}function z(a,c){var d=["location","inherit","reload"];return{restrict:"A",require:["?^uiSrefActive","?^uiSrefActiveEq"],link:function(e,f,g,h){var i=x(g.uiSref,a.current.name),j=null,k=y(f)||a.$current,l="FORM"===f[0].nodeName,m=l?"action":"href",n=!0,o={relative:k,inherit:!0},p=e.$eval(g.uiSrefOpts)||{};b.forEach(d,function(a){a in p&&(o[a]=p[a])});var q=function(b){if(b&&(j=b),n){var c=a.href(i.state,j,o),d=h[1]||h[0];return d&&d.$$setStateInfo(i.state,j),null===c?(n=!1,!1):void(f[0][m]=c)}};i.paramExpr&&(e.$watch(i.paramExpr,function(a){a!==j&&q(a)},!0),j=e.$eval(i.paramExpr)),q(),l||f.bind("click",function(b){var d=b.which||b.button;if(!(d>1||b.ctrlKey||b.metaKey||b.shiftKey||f.attr("target"))){var e=c(function(){a.go(i.state,j,o)});b.preventDefault(),b.preventDefault=function(){c.cancel(e)}}})}}}function A(a,b,c){return{restrict:"A",controller:["$scope","$element","$attrs",function(d,e,f){function g(){h()?e.addClass(m):e.removeClass(m)}function h(){return"undefined"!=typeof f.uiSrefActiveEq?a.$current.self===k&&i():a.includes(k.name)&&i()}function i(){return!l||j(l,b)}var k,l,m;m=c(f.uiSrefActiveEq||f.uiSrefActive||"",!1)(d),this.$$setStateInfo=function(b,c){k=a.get(b,y(e)),l=c,g()},d.$on("$stateChangeSuccess",g)}]}}function B(a){return function(b){return a.is(b)}}function C(a){return function(b){return a.includes(b)}}var D=b.isDefined,E=b.isFunction,F=b.isString,G=b.isObject,H=b.isArray,I=b.forEach,J=b.extend,K=b.copy;b.module("ui.router.util",["ng"]),b.module("ui.router.router",["ui.router.util"]),b.module("ui.router.state",["ui.router.router","ui.router.util"]),b.module("ui.router",["ui.router.state"]),b.module("ui.router.compat",["ui.router"]),l.$inject=["$q","$injector"],b.module("ui.router.util").service("$resolve",l),m.$inject=["$http","$templateCache","$injector"],b.module("ui.router.util").service("$templateFactory",m),n.prototype.concat=function(a,b){return new n(this.sourcePath+a+this.sourceSearch,b)},n.prototype.toString=function(){return this.source},n.prototype.exec=function(a,b){var c=this.regexp.exec(a);if(!c)return null;b=b||{};var d,e,f,g=this.parameters(),h=g.length,i=this.segments.length-1,j={};if(i!==c.length-1)throw new Error("Unbalanced capture group in route '"+this.source+"'");for(d=0;i>d;d++)f=g[d],e=this.params[f],j[f]=e.$value(c[d+1]);for(;h>d;d++)f=g[d],e=this.params[f],j[f]=e.$value(b[f]);return j},n.prototype.parameters=function(a){return D(a)?this.params[a]||null:g(this.params)},n.prototype.validates=function(a){var b,c,d=!0,e=this;return I(a,function(a,f){e.params[f]&&(c=e.params[f],b=!a&&D(c.value),d=d&&(b||c.type.is(a)))}),d},n.prototype.format=function(a){var b=this.segments,c=this.parameters();if(!a)return b.join("").replace("//","/");var d,e,f,g,h,i,j=b.length-1,k=c.length,l=b[0];if(!this.validates(a))return null;for(d=0;j>d;d++)g=c[d],f=a[g],h=this.params[g],(D(f)||"/"!==b[d]&&"/"!==b[d+1])&&(null!=f&&(l+=encodeURIComponent(h.type.encode(f))),l+=b[d+1]);for(;k>d;d++)g=c[d],f=a[g],null!=f&&(i=H(f),i&&(f=f.map(encodeURIComponent).join("&"+g+"=")),l+=(e?"&":"?")+g+"="+(i?f:encodeURIComponent(f)),e=!0);return l},n.prototype.$types={},o.prototype.is=function(){return!0},o.prototype.encode=function(a){return a},o.prototype.decode=function(a){return a},o.prototype.equals=function(a,b){return a==b},o.prototype.$subPattern=function(){var a=this.pattern.toString();return a.substr(1,a.length-2)},o.prototype.pattern=/.*/,b.module("ui.router.util").provider("$urlMatcherFactory",p),q.$inject=["$locationProvider","$urlMatcherFactoryProvider"],b.module("ui.router.router").provider("$urlRouter",q),r.$inject=["$urlRouterProvider","$urlMatcherFactoryProvider"],b.module("ui.router.state").value("$stateParams",{}).provider("$state",r),s.$inject=[],b.module("ui.router.state").provider("$view",s),b.module("ui.router.state").provider("$uiViewScroll",t),u.$inject=["$state","$injector","$uiViewScroll"],v.$inject=["$compile","$controller","$state"],b.module("ui.router.state").directive("uiView",u),b.module("ui.router.state").directive("uiView",v),z.$inject=["$state","$timeout"],A.$inject=["$state","$stateParams","$interpolate"],b.module("ui.router.state").directive("uiSref",z).directive("uiSrefActive",A).directive("uiSrefActiveEq",A),B.$inject=["$state"],C.$inject=["$state"],b.module("ui.router.state").filter("isState",B).filter("includedByState",C)}(window,window.angular);
 
 /**
+ * @license AngularJS v1.3.3
+ * (c) 2010-2014 Google, Inc. http://angularjs.org
+ * License: MIT
+ */
+(function(window, angular, undefined) {'use strict';
+
+var $sanitizeMinErr = angular.$$minErr('$sanitize');
+
+/**
+ * @ngdoc module
+ * @name ngSanitize
+ * @description
+ *
+ * # ngSanitize
+ *
+ * The `ngSanitize` module provides functionality to sanitize HTML.
+ *
+ *
+ * <div doc-module-components="ngSanitize"></div>
+ *
+ * See {@link ngSanitize.$sanitize `$sanitize`} for usage.
+ */
+
+/*
+ * HTML Parser By Misko Hevery (misko@hevery.com)
+ * based on:  HTML Parser By John Resig (ejohn.org)
+ * Original code by Erik Arvidsson, Mozilla Public License
+ * http://erik.eae.net/simplehtmlparser/simplehtmlparser.js
+ *
+ * // Use like so:
+ * htmlParser(htmlString, {
+ *     start: function(tag, attrs, unary) {},
+ *     end: function(tag) {},
+ *     chars: function(text) {},
+ *     comment: function(text) {}
+ * });
+ *
+ */
+
+
+/**
+ * @ngdoc service
+ * @name $sanitize
+ * @kind function
+ *
+ * @description
+ *   The input is sanitized by parsing the HTML into tokens. All safe tokens (from a whitelist) are
+ *   then serialized back to properly escaped html string. This means that no unsafe input can make
+ *   it into the returned string, however, since our parser is more strict than a typical browser
+ *   parser, it's possible that some obscure input, which would be recognized as valid HTML by a
+ *   browser, won't make it through the sanitizer. The input may also contain SVG markup.
+ *   The whitelist is configured using the functions `aHrefSanitizationWhitelist` and
+ *   `imgSrcSanitizationWhitelist` of {@link ng.$compileProvider `$compileProvider`}.
+ *
+ * @param {string} html HTML input.
+ * @returns {string} Sanitized HTML.
+ *
+ * @example
+   <example module="sanitizeExample" deps="angular-sanitize.js">
+   <file name="index.html">
+     <script>
+         angular.module('sanitizeExample', ['ngSanitize'])
+           .controller('ExampleController', ['$scope', '$sce', function($scope, $sce) {
+             $scope.snippet =
+               '<p style="color:blue">an html\n' +
+               '<em onmouseover="this.textContent=\'PWN3D!\'">click here</em>\n' +
+               'snippet</p>';
+             $scope.deliberatelyTrustDangerousSnippet = function() {
+               return $sce.trustAsHtml($scope.snippet);
+             };
+           }]);
+     </script>
+     <div ng-controller="ExampleController">
+        Snippet: <textarea ng-model="snippet" cols="60" rows="3"></textarea>
+       <table>
+         <tr>
+           <td>Directive</td>
+           <td>How</td>
+           <td>Source</td>
+           <td>Rendered</td>
+         </tr>
+         <tr id="bind-html-with-sanitize">
+           <td>ng-bind-html</td>
+           <td>Automatically uses $sanitize</td>
+           <td><pre>&lt;div ng-bind-html="snippet"&gt;<br/>&lt;/div&gt;</pre></td>
+           <td><div ng-bind-html="snippet"></div></td>
+         </tr>
+         <tr id="bind-html-with-trust">
+           <td>ng-bind-html</td>
+           <td>Bypass $sanitize by explicitly trusting the dangerous value</td>
+           <td>
+           <pre>&lt;div ng-bind-html="deliberatelyTrustDangerousSnippet()"&gt;
+&lt;/div&gt;</pre>
+           </td>
+           <td><div ng-bind-html="deliberatelyTrustDangerousSnippet()"></div></td>
+         </tr>
+         <tr id="bind-default">
+           <td>ng-bind</td>
+           <td>Automatically escapes</td>
+           <td><pre>&lt;div ng-bind="snippet"&gt;<br/>&lt;/div&gt;</pre></td>
+           <td><div ng-bind="snippet"></div></td>
+         </tr>
+       </table>
+       </div>
+   </file>
+   <file name="protractor.js" type="protractor">
+     it('should sanitize the html snippet by default', function() {
+       expect(element(by.css('#bind-html-with-sanitize div')).getInnerHtml()).
+         toBe('<p>an html\n<em>click here</em>\nsnippet</p>');
+     });
+
+     it('should inline raw snippet if bound to a trusted value', function() {
+       expect(element(by.css('#bind-html-with-trust div')).getInnerHtml()).
+         toBe("<p style=\"color:blue\">an html\n" +
+              "<em onmouseover=\"this.textContent='PWN3D!'\">click here</em>\n" +
+              "snippet</p>");
+     });
+
+     it('should escape snippet without any filter', function() {
+       expect(element(by.css('#bind-default div')).getInnerHtml()).
+         toBe("&lt;p style=\"color:blue\"&gt;an html\n" +
+              "&lt;em onmouseover=\"this.textContent='PWN3D!'\"&gt;click here&lt;/em&gt;\n" +
+              "snippet&lt;/p&gt;");
+     });
+
+     it('should update', function() {
+       element(by.model('snippet')).clear();
+       element(by.model('snippet')).sendKeys('new <b onclick="alert(1)">text</b>');
+       expect(element(by.css('#bind-html-with-sanitize div')).getInnerHtml()).
+         toBe('new <b>text</b>');
+       expect(element(by.css('#bind-html-with-trust div')).getInnerHtml()).toBe(
+         'new <b onclick="alert(1)">text</b>');
+       expect(element(by.css('#bind-default div')).getInnerHtml()).toBe(
+         "new &lt;b onclick=\"alert(1)\"&gt;text&lt;/b&gt;");
+     });
+   </file>
+   </example>
+ */
+function $SanitizeProvider() {
+  this.$get = ['$$sanitizeUri', function($$sanitizeUri) {
+    return function(html) {
+      var buf = [];
+      htmlParser(html, htmlSanitizeWriter(buf, function(uri, isImage) {
+        return !/^unsafe/.test($$sanitizeUri(uri, isImage));
+      }));
+      return buf.join('');
+    };
+  }];
+}
+
+function sanitizeText(chars) {
+  var buf = [];
+  var writer = htmlSanitizeWriter(buf, angular.noop);
+  writer.chars(chars);
+  return buf.join('');
+}
+
+
+// Regular Expressions for parsing tags and attributes
+var START_TAG_REGEXP =
+       /^<((?:[a-zA-Z])[\w:-]*)((?:\s+[\w:-]+(?:\s*=\s*(?:(?:"[^"]*")|(?:'[^']*')|[^>\s]+))?)*)\s*(\/?)\s*(>?)/,
+  END_TAG_REGEXP = /^<\/\s*([\w:-]+)[^>]*>/,
+  ATTR_REGEXP = /([\w:-]+)(?:\s*=\s*(?:(?:"((?:[^"])*)")|(?:'((?:[^'])*)')|([^>\s]+)))?/g,
+  BEGIN_TAG_REGEXP = /^</,
+  BEGING_END_TAGE_REGEXP = /^<\//,
+  COMMENT_REGEXP = /<!--(.*?)-->/g,
+  DOCTYPE_REGEXP = /<!DOCTYPE([^>]*?)>/i,
+  CDATA_REGEXP = /<!\[CDATA\[(.*?)]]>/g,
+  SURROGATE_PAIR_REGEXP = /[\uD800-\uDBFF][\uDC00-\uDFFF]/g,
+  // Match everything outside of normal chars and " (quote character)
+  NON_ALPHANUMERIC_REGEXP = /([^\#-~| |!])/g;
+
+
+// Good source of info about elements and attributes
+// http://dev.w3.org/html5/spec/Overview.html#semantics
+// http://simon.html5.org/html-elements
+
+// Safe Void Elements - HTML5
+// http://dev.w3.org/html5/spec/Overview.html#void-elements
+var voidElements = makeMap("area,br,col,hr,img,wbr");
+
+// Elements that you can, intentionally, leave open (and which close themselves)
+// http://dev.w3.org/html5/spec/Overview.html#optional-tags
+var optionalEndTagBlockElements = makeMap("colgroup,dd,dt,li,p,tbody,td,tfoot,th,thead,tr"),
+    optionalEndTagInlineElements = makeMap("rp,rt"),
+    optionalEndTagElements = angular.extend({},
+                                            optionalEndTagInlineElements,
+                                            optionalEndTagBlockElements);
+
+// Safe Block Elements - HTML5
+var blockElements = angular.extend({}, optionalEndTagBlockElements, makeMap("address,article," +
+        "aside,blockquote,caption,center,del,dir,div,dl,figure,figcaption,footer,h1,h2,h3,h4,h5," +
+        "h6,header,hgroup,hr,ins,map,menu,nav,ol,pre,script,section,table,ul"));
+
+// Inline Elements - HTML5
+var inlineElements = angular.extend({}, optionalEndTagInlineElements, makeMap("a,abbr,acronym,b," +
+        "bdi,bdo,big,br,cite,code,del,dfn,em,font,i,img,ins,kbd,label,map,mark,q,ruby,rp,rt,s," +
+        "samp,small,span,strike,strong,sub,sup,time,tt,u,var"));
+
+// SVG Elements
+// https://wiki.whatwg.org/wiki/Sanitization_rules#svg_Elements
+var svgElements = makeMap("animate,animateColor,animateMotion,animateTransform,circle,defs," +
+        "desc,ellipse,font-face,font-face-name,font-face-src,g,glyph,hkern,image,linearGradient," +
+        "line,marker,metadata,missing-glyph,mpath,path,polygon,polyline,radialGradient,rect,set," +
+        "stop,svg,switch,text,title,tspan,use");
+
+// Special Elements (can contain anything)
+var specialElements = makeMap("script,style");
+
+var validElements = angular.extend({},
+                                   voidElements,
+                                   blockElements,
+                                   inlineElements,
+                                   optionalEndTagElements,
+                                   svgElements);
+
+//Attributes that have href and hence need to be sanitized
+var uriAttrs = makeMap("background,cite,href,longdesc,src,usemap,xlink:href");
+
+var htmlAttrs = makeMap('abbr,align,alt,axis,bgcolor,border,cellpadding,cellspacing,class,clear,' +
+    'color,cols,colspan,compact,coords,dir,face,headers,height,hreflang,hspace,' +
+    'ismap,lang,language,nohref,nowrap,rel,rev,rows,rowspan,rules,' +
+    'scope,scrolling,shape,size,span,start,summary,target,title,type,' +
+    'valign,value,vspace,width');
+
+// SVG attributes (without "id" and "name" attributes)
+// https://wiki.whatwg.org/wiki/Sanitization_rules#svg_Attributes
+var svgAttrs = makeMap('accent-height,accumulate,additive,alphabetic,arabic-form,ascent,' +
+    'attributeName,attributeType,baseProfile,bbox,begin,by,calcMode,cap-height,class,color,' +
+    'color-rendering,content,cx,cy,d,dx,dy,descent,display,dur,end,fill,fill-rule,font-family,' +
+    'font-size,font-stretch,font-style,font-variant,font-weight,from,fx,fy,g1,g2,glyph-name,' +
+    'gradientUnits,hanging,height,horiz-adv-x,horiz-origin-x,ideographic,k,keyPoints,' +
+    'keySplines,keyTimes,lang,marker-end,marker-mid,marker-start,markerHeight,markerUnits,' +
+    'markerWidth,mathematical,max,min,offset,opacity,orient,origin,overline-position,' +
+    'overline-thickness,panose-1,path,pathLength,points,preserveAspectRatio,r,refX,refY,' +
+    'repeatCount,repeatDur,requiredExtensions,requiredFeatures,restart,rotate,rx,ry,slope,stemh,' +
+    'stemv,stop-color,stop-opacity,strikethrough-position,strikethrough-thickness,stroke,' +
+    'stroke-dasharray,stroke-dashoffset,stroke-linecap,stroke-linejoin,stroke-miterlimit,' +
+    'stroke-opacity,stroke-width,systemLanguage,target,text-anchor,to,transform,type,u1,u2,' +
+    'underline-position,underline-thickness,unicode,unicode-range,units-per-em,values,version,' +
+    'viewBox,visibility,width,widths,x,x-height,x1,x2,xlink:actuate,xlink:arcrole,xlink:role,' +
+    'xlink:show,xlink:title,xlink:type,xml:base,xml:lang,xml:space,xmlns,xmlns:xlink,y,y1,y2,' +
+    'zoomAndPan');
+
+var validAttrs = angular.extend({},
+                                uriAttrs,
+                                svgAttrs,
+                                htmlAttrs);
+
+function makeMap(str) {
+  var obj = {}, items = str.split(','), i;
+  for (i = 0; i < items.length; i++) obj[items[i]] = true;
+  return obj;
+}
+
+
+/**
+ * @example
+ * htmlParser(htmlString, {
+ *     start: function(tag, attrs, unary) {},
+ *     end: function(tag) {},
+ *     chars: function(text) {},
+ *     comment: function(text) {}
+ * });
+ *
+ * @param {string} html string
+ * @param {object} handler
+ */
+function htmlParser(html, handler) {
+  if (typeof html !== 'string') {
+    if (html === null || typeof html === 'undefined') {
+      html = '';
+    } else {
+      html = '' + html;
+    }
+  }
+  var index, chars, match, stack = [], last = html, text;
+  stack.last = function() { return stack[ stack.length - 1 ]; };
+
+  while (html) {
+    text = '';
+    chars = true;
+
+    // Make sure we're not in a script or style element
+    if (!stack.last() || !specialElements[ stack.last() ]) {
+
+      // Comment
+      if (html.indexOf("<!--") === 0) {
+        // comments containing -- are not allowed unless they terminate the comment
+        index = html.indexOf("--", 4);
+
+        if (index >= 0 && html.lastIndexOf("-->", index) === index) {
+          if (handler.comment) handler.comment(html.substring(4, index));
+          html = html.substring(index + 3);
+          chars = false;
+        }
+      // DOCTYPE
+      } else if (DOCTYPE_REGEXP.test(html)) {
+        match = html.match(DOCTYPE_REGEXP);
+
+        if (match) {
+          html = html.replace(match[0], '');
+          chars = false;
+        }
+      // end tag
+      } else if (BEGING_END_TAGE_REGEXP.test(html)) {
+        match = html.match(END_TAG_REGEXP);
+
+        if (match) {
+          html = html.substring(match[0].length);
+          match[0].replace(END_TAG_REGEXP, parseEndTag);
+          chars = false;
+        }
+
+      // start tag
+      } else if (BEGIN_TAG_REGEXP.test(html)) {
+        match = html.match(START_TAG_REGEXP);
+
+        if (match) {
+          // We only have a valid start-tag if there is a '>'.
+          if (match[4]) {
+            html = html.substring(match[0].length);
+            match[0].replace(START_TAG_REGEXP, parseStartTag);
+          }
+          chars = false;
+        } else {
+          // no ending tag found --- this piece should be encoded as an entity.
+          text += '<';
+          html = html.substring(1);
+        }
+      }
+
+      if (chars) {
+        index = html.indexOf("<");
+
+        text += index < 0 ? html : html.substring(0, index);
+        html = index < 0 ? "" : html.substring(index);
+
+        if (handler.chars) handler.chars(decodeEntities(text));
+      }
+
+    } else {
+      html = html.replace(new RegExp("(.*)<\\s*\\/\\s*" + stack.last() + "[^>]*>", 'i'),
+        function(all, text) {
+          text = text.replace(COMMENT_REGEXP, "$1").replace(CDATA_REGEXP, "$1");
+
+          if (handler.chars) handler.chars(decodeEntities(text));
+
+          return "";
+      });
+
+      parseEndTag("", stack.last());
+    }
+
+    if (html == last) {
+      throw $sanitizeMinErr('badparse', "The sanitizer was unable to parse the following block " +
+                                        "of html: {0}", html);
+    }
+    last = html;
+  }
+
+  // Clean up any remaining tags
+  parseEndTag();
+
+  function parseStartTag(tag, tagName, rest, unary) {
+    tagName = angular.lowercase(tagName);
+    if (blockElements[ tagName ]) {
+      while (stack.last() && inlineElements[ stack.last() ]) {
+        parseEndTag("", stack.last());
+      }
+    }
+
+    if (optionalEndTagElements[ tagName ] && stack.last() == tagName) {
+      parseEndTag("", tagName);
+    }
+
+    unary = voidElements[ tagName ] || !!unary;
+
+    if (!unary)
+      stack.push(tagName);
+
+    var attrs = {};
+
+    rest.replace(ATTR_REGEXP,
+      function(match, name, doubleQuotedValue, singleQuotedValue, unquotedValue) {
+        var value = doubleQuotedValue
+          || singleQuotedValue
+          || unquotedValue
+          || '';
+
+        attrs[name] = decodeEntities(value);
+    });
+    if (handler.start) handler.start(tagName, attrs, unary);
+  }
+
+  function parseEndTag(tag, tagName) {
+    var pos = 0, i;
+    tagName = angular.lowercase(tagName);
+    if (tagName)
+      // Find the closest opened tag of the same type
+      for (pos = stack.length - 1; pos >= 0; pos--)
+        if (stack[ pos ] == tagName)
+          break;
+
+    if (pos >= 0) {
+      // Close all the open elements, up the stack
+      for (i = stack.length - 1; i >= pos; i--)
+        if (handler.end) handler.end(stack[ i ]);
+
+      // Remove the open elements from the stack
+      stack.length = pos;
+    }
+  }
+}
+
+var hiddenPre=document.createElement("pre");
+var spaceRe = /^(\s*)([\s\S]*?)(\s*)$/;
+/**
+ * decodes all entities into regular string
+ * @param value
+ * @returns {string} A string with decoded entities.
+ */
+function decodeEntities(value) {
+  if (!value) { return ''; }
+
+  // Note: IE8 does not preserve spaces at the start/end of innerHTML
+  // so we must capture them and reattach them afterward
+  var parts = spaceRe.exec(value);
+  var spaceBefore = parts[1];
+  var spaceAfter = parts[3];
+  var content = parts[2];
+  if (content) {
+    hiddenPre.innerHTML=content.replace(/</g,"&lt;");
+    // innerText depends on styling as it doesn't display hidden elements.
+    // Therefore, it's better to use textContent not to cause unnecessary
+    // reflows. However, IE<9 don't support textContent so the innerText
+    // fallback is necessary.
+    content = 'textContent' in hiddenPre ?
+      hiddenPre.textContent : hiddenPre.innerText;
+  }
+  return spaceBefore + content + spaceAfter;
+}
+
+/**
+ * Escapes all potentially dangerous characters, so that the
+ * resulting string can be safely inserted into attribute or
+ * element text.
+ * @param value
+ * @returns {string} escaped text
+ */
+function encodeEntities(value) {
+  return value.
+    replace(/&/g, '&amp;').
+    replace(SURROGATE_PAIR_REGEXP, function(value) {
+      var hi = value.charCodeAt(0);
+      var low = value.charCodeAt(1);
+      return '&#' + (((hi - 0xD800) * 0x400) + (low - 0xDC00) + 0x10000) + ';';
+    }).
+    replace(NON_ALPHANUMERIC_REGEXP, function(value) {
+      return '&#' + value.charCodeAt(0) + ';';
+    }).
+    replace(/</g, '&lt;').
+    replace(/>/g, '&gt;');
+}
+
+/**
+ * create an HTML/XML writer which writes to buffer
+ * @param {Array} buf use buf.jain('') to get out sanitized html string
+ * @returns {object} in the form of {
+ *     start: function(tag, attrs, unary) {},
+ *     end: function(tag) {},
+ *     chars: function(text) {},
+ *     comment: function(text) {}
+ * }
+ */
+function htmlSanitizeWriter(buf, uriValidator) {
+  var ignore = false;
+  var out = angular.bind(buf, buf.push);
+  return {
+    start: function(tag, attrs, unary) {
+      tag = angular.lowercase(tag);
+      if (!ignore && specialElements[tag]) {
+        ignore = tag;
+      }
+      if (!ignore && validElements[tag] === true) {
+        out('<');
+        out(tag);
+        angular.forEach(attrs, function(value, key) {
+          var lkey=angular.lowercase(key);
+          var isImage = (tag === 'img' && lkey === 'src') || (lkey === 'background');
+          if (validAttrs[lkey] === true &&
+            (uriAttrs[lkey] !== true || uriValidator(value, isImage))) {
+            out(' ');
+            out(key);
+            out('="');
+            out(encodeEntities(value));
+            out('"');
+          }
+        });
+        out(unary ? '/>' : '>');
+      }
+    },
+    end: function(tag) {
+        tag = angular.lowercase(tag);
+        if (!ignore && validElements[tag] === true) {
+          out('</');
+          out(tag);
+          out('>');
+        }
+        if (tag == ignore) {
+          ignore = false;
+        }
+      },
+    chars: function(chars) {
+        if (!ignore) {
+          out(encodeEntities(chars));
+        }
+      }
+  };
+}
+
+
+// define ngSanitize module and register $sanitize service
+angular.module('ngSanitize', []).provider('$sanitize', $SanitizeProvider);
+
+/* global sanitizeText: false */
+
+/**
+ * @ngdoc filter
+ * @name linky
+ * @kind function
+ *
+ * @description
+ * Finds links in text input and turns them into html links. Supports http/https/ftp/mailto and
+ * plain email address links.
+ *
+ * Requires the {@link ngSanitize `ngSanitize`} module to be installed.
+ *
+ * @param {string} text Input text.
+ * @param {string} target Window (_blank|_self|_parent|_top) or named frame to open links in.
+ * @returns {string} Html-linkified text.
+ *
+ * @usage
+   <span ng-bind-html="linky_expression | linky"></span>
+ *
+ * @example
+   <example module="linkyExample" deps="angular-sanitize.js">
+     <file name="index.html">
+       <script>
+         angular.module('linkyExample', ['ngSanitize'])
+           .controller('ExampleController', ['$scope', function($scope) {
+             $scope.snippet =
+               'Pretty text with some links:\n'+
+               'http://angularjs.org/,\n'+
+               'mailto:us@somewhere.org,\n'+
+               'another@somewhere.org,\n'+
+               'and one more: ftp://127.0.0.1/.';
+             $scope.snippetWithTarget = 'http://angularjs.org/';
+           }]);
+       </script>
+       <div ng-controller="ExampleController">
+       Snippet: <textarea ng-model="snippet" cols="60" rows="3"></textarea>
+       <table>
+         <tr>
+           <td>Filter</td>
+           <td>Source</td>
+           <td>Rendered</td>
+         </tr>
+         <tr id="linky-filter">
+           <td>linky filter</td>
+           <td>
+             <pre>&lt;div ng-bind-html="snippet | linky"&gt;<br>&lt;/div&gt;</pre>
+           </td>
+           <td>
+             <div ng-bind-html="snippet | linky"></div>
+           </td>
+         </tr>
+         <tr id="linky-target">
+          <td>linky target</td>
+          <td>
+            <pre>&lt;div ng-bind-html="snippetWithTarget | linky:'_blank'"&gt;<br>&lt;/div&gt;</pre>
+          </td>
+          <td>
+            <div ng-bind-html="snippetWithTarget | linky:'_blank'"></div>
+          </td>
+         </tr>
+         <tr id="escaped-html">
+           <td>no filter</td>
+           <td><pre>&lt;div ng-bind="snippet"&gt;<br>&lt;/div&gt;</pre></td>
+           <td><div ng-bind="snippet"></div></td>
+         </tr>
+       </table>
+     </file>
+     <file name="protractor.js" type="protractor">
+       it('should linkify the snippet with urls', function() {
+         expect(element(by.id('linky-filter')).element(by.binding('snippet | linky')).getText()).
+             toBe('Pretty text with some links: http://angularjs.org/, us@somewhere.org, ' +
+                  'another@somewhere.org, and one more: ftp://127.0.0.1/.');
+         expect(element.all(by.css('#linky-filter a')).count()).toEqual(4);
+       });
+
+       it('should not linkify snippet without the linky filter', function() {
+         expect(element(by.id('escaped-html')).element(by.binding('snippet')).getText()).
+             toBe('Pretty text with some links: http://angularjs.org/, mailto:us@somewhere.org, ' +
+                  'another@somewhere.org, and one more: ftp://127.0.0.1/.');
+         expect(element.all(by.css('#escaped-html a')).count()).toEqual(0);
+       });
+
+       it('should update', function() {
+         element(by.model('snippet')).clear();
+         element(by.model('snippet')).sendKeys('new http://link.');
+         expect(element(by.id('linky-filter')).element(by.binding('snippet | linky')).getText()).
+             toBe('new http://link.');
+         expect(element.all(by.css('#linky-filter a')).count()).toEqual(1);
+         expect(element(by.id('escaped-html')).element(by.binding('snippet')).getText())
+             .toBe('new http://link.');
+       });
+
+       it('should work with the target property', function() {
+        expect(element(by.id('linky-target')).
+            element(by.binding("snippetWithTarget | linky:'_blank'")).getText()).
+            toBe('http://angularjs.org/');
+        expect(element(by.css('#linky-target a')).getAttribute('target')).toEqual('_blank');
+       });
+     </file>
+   </example>
+ */
+angular.module('ngSanitize').filter('linky', ['$sanitize', function($sanitize) {
+  var LINKY_URL_REGEXP =
+        /((ftp|https?):\/\/|(mailto:)?[A-Za-z0-9._%+-]+@)\S*[^\s.;,(){}<>"]/,
+      MAILTO_REGEXP = /^mailto:/;
+
+  return function(text, target) {
+    if (!text) return text;
+    var match;
+    var raw = text;
+    var html = [];
+    var url;
+    var i;
+    while ((match = raw.match(LINKY_URL_REGEXP))) {
+      // We can not end in these as they are sometimes found at the end of the sentence
+      url = match[0];
+      // if we did not match ftp/http/mailto then assume mailto
+      if (match[2] == match[3]) url = 'mailto:' + url;
+      i = match.index;
+      addText(raw.substr(0, i));
+      addLink(url, match[0].replace(MAILTO_REGEXP, ''));
+      raw = raw.substring(i + match[0].length);
+    }
+    addText(raw);
+    return $sanitize(html.join(''));
+
+    function addText(text) {
+      if (!text) {
+        return;
+      }
+      html.push(sanitizeText(text));
+    }
+
+    function addLink(url, text) {
+      html.push('<a ');
+      if (angular.isDefined(target)) {
+        html.push('target="');
+        html.push(target);
+        html.push('" ');
+      }
+      html.push('href="');
+      html.push(url);
+      html.push('">');
+      addText(text);
+      html.push('</a>');
+    }
+  };
+}]);
+
+
+})(window, window.angular);
+
+/**
  * @preserve FastClick: polyfill to remove click delays on browsers with touch UIs.
  *
  * @version 1.0.3

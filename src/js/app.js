@@ -1,4 +1,4 @@
-var app = angular.module('App', ['infinite-scroll'])
+var app = angular.module('App', ['infinite-scroll', 'ngSanitize'])
 
 app.factory('Filters', function(){
   return {};
@@ -19,14 +19,19 @@ app.factory('Categories', [ '$http', function($http){
 }]);
 
 app.factory('Products', ['$http', 'Filters', function($http, Filters){
+  var factory = this;
   var products = [];
   var page = 1;
+  var searching = true;
   return {
     getProducts: function(){
       return products;
     },
     currentPage: function(){
       return page;
+    },
+    currentlySearching: function(){
+      return searching;
     },
     enumeratePage: function(){
       page += 1;
@@ -41,9 +46,11 @@ app.factory('Products', ['$http', 'Filters', function($http, Filters){
       products = products.concat(newProducts);
     },
     fetchProducts: function(){
+      searching = true;
       $http.get('products.json', {params: {page: page.toString(), gender: Filters.gender, category: Filters.category, search_string: Filters.searchString}}).success(function(data){
         products = products.concat(data);
         scrollActive = true;
+        searching = false;
       });
     }
   };
@@ -113,7 +120,6 @@ app.controller('CategoryController', ['Filters', 'Products', 'Categories', funct
 
 app.controller('SearchController', ['Filters', 'Products', 'Categories', function(Filters, Products, Categories){
   this.updateSearch = function(searchString){
-    console.log(searchString);
     Filters.searchString = searchString;
     Products.resetProducts();
     Products.resetPage();
@@ -130,7 +136,6 @@ app.controller('SearchController', ['Filters', 'Products', 'Categories', functio
         }
       });
     });
-    console.log(Filters);
   };
 
 }]);
