@@ -4,24 +4,18 @@
 
 .sub-nav-container {
   width: 100%;
-  height: $sub-nav-height;
+  // height: $sub-nav-height;
   background-color: $purple;
   margin-bottom: 20px;
-
-  dl.sub-nav {
-    line-height: $sub-nav-height;
-    // padding-top: 0px;
-
-    dd.category-select div select {
-      background: none;
-      border: none;
-      color: $off-white;
-      font-family: $header-font-family;
-      height: 45px;
-      font-size: 1.125rem;
-      &:focus {
-        outline: none;
-      }
+  padding-top: 10px;
+  padding-bottom: 10px;
+  form {
+    input[type="submit"] {
+      background-color: darken($purple, 10%);
+      margin-bottom: 0px !important;
+    }
+    input {
+      margin-bottom: 0px;
     }
   }
 }

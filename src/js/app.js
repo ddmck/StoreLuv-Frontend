@@ -92,7 +92,7 @@ app.controller('ProductsController',  ['$http', 'Filters', 'Products', function(
   };
 }]);
 
-app.controller('SubNavController', ['Filters', 'Products', function(Filters, Products){
+app.controller('GenderController', ['Filters', 'Products', function(Filters, Products){
   this.setGender = function(gender) {
     if ( gender === "mens") {
       Filters.gender = "male";
