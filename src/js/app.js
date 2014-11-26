@@ -55,7 +55,7 @@ app.factory('Products', ['$http', 'Filters', function($http, Filters){
     },
     fetchProducts: function(){
       searching = true;
-      $http.get('products.json', {params: {page: page.toString(), gender: Filters.getFilters().gender, category: Filters.getFilters().category, search_string: Filters.getFilters().searchString}}).success(function(data){
+      $http.get('products.json', {async: true, params: {page: page.toString(), gender: Filters.getFilters().gender, category: Filters.getFilters().category, search_string: Filters.getFilters().searchString}}).success(function(data){
         products = products.concat(data);
         scrollActive = true;
         searching = false;
@@ -92,7 +92,7 @@ app.controller('ProductsController',  ['$http', 'Filters', 'Products', function(
       scrollActive = false;
       Products.enumeratePage();
       
-      $http.get('products.json', {params: {page: Products.currentPage().toString(), gender: this.filters.getFilters().gender, category: this.filters.getFilters().category, search_string: Filters.getFilters().searchString}}).success(function(data){
+      $http.get('products.json', {async: true, params: {page: Products.currentPage().toString(), gender: this.filters.getFilters().gender, category: this.filters.getFilters().category, search_string: Filters.getFilters().searchString}}).success(function(data){
         productCtrl.products.addProducts(data);
         scrollActive = true;
       });
