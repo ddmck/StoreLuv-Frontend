@@ -5897,6 +5897,15 @@ th.hide-for-touch {
   .sub-nav-container form input {
     margin-bottom: 0px; }
 
+@media only screen and (max-width: 64.063em) {
+  .filter-container ul {
+    padding-left: 15px;
+    padding-right: 15px; }
+    .filter-container ul li {
+      padding-bottom: 10px; }
+      .filter-container ul li select {
+        margin-bottom: 5px; } }
+
 .product-container {
   position: relative;
   width: 100%;

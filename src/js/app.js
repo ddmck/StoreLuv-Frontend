@@ -1,7 +1,15 @@
 var app = angular.module('App', ['infinite-scroll', 'ngSanitize'])
 
 app.factory('Filters', function(){
-  return {};
+  var filters = {};
+  return {
+    getFilters: function(){
+      return filters;
+    },
+    setFilter: function(name, value){
+      filters[name] = value;
+    }       
+  };
 });
 
 app.factory('Categories', [ '$http', function($http){
@@ -47,7 +55,7 @@ app.factory('Products', ['$http', 'Filters', function($http, Filters){
     },
     fetchProducts: function(){
       searching = true;
-      $http.get('products.json', {params: {page: page.toString(), gender: Filters.gender, category: Filters.category, search_string: Filters.searchString}}).success(function(data){
+      $http.get('products.json', {params: {page: page.toString(), gender: Filters.getFilters().gender, category: Filters.getFilters().category, search_string: Filters.getFilters().searchString}}).success(function(data){
         products = products.concat(data);
         scrollActive = true;
         searching = false;
@@ -84,7 +92,7 @@ app.controller('ProductsController',  ['$http', 'Filters', 'Products', function(
       scrollActive = false;
       Products.enumeratePage();
       
-      $http.get('products.json', {params: {page: Products.currentPage().toString(), gender: this.filters.gender, category: this.filters.category, search_string: Filters.searchString}}).success(function(data){
+      $http.get('products.json', {params: {page: Products.currentPage().toString(), gender: this.filters.getFilters().gender, category: this.filters.getFilters().category, search_string: Filters.getFilters().searchString}}).success(function(data){
         productCtrl.products.addProducts(data);
         scrollActive = true;
       });
@@ -95,9 +103,9 @@ app.controller('ProductsController',  ['$http', 'Filters', 'Products', function(
 app.controller('GenderController', ['Filters', 'Products', function(Filters, Products){
   this.setGender = function(gender) {
     if ( gender === "mens") {
-      Filters.gender = "male";
+      Filters.setFilter("gender", "male");
     } else if ( gender === "womens") {
-      Filters.gender = "female";
+      Filters.setFilter("gender", "female");
     }
     Products.resetProducts();
     Products.fetchProducts();
@@ -109,9 +117,10 @@ app.controller('CategoryController', ['Filters', 'Products', 'Categories', funct
   categoryCtrl.categories = [];
   Categories.fetchCategories();
   categoryCtrl.categories = Categories;
+  this.filters = Filters;
 
   this.setCategory = function(cat_id){
-    Filters.category = cat_id;
+    Filters.setFilter("category", parseInt(cat_id));
     Products.resetProducts();
     Products.resetPage();
     Products.fetchProducts();
@@ -120,23 +129,23 @@ app.controller('CategoryController', ['Filters', 'Products', 'Categories', funct
 
 app.controller('SearchController', ['Filters', 'Products', 'Categories', function(Filters, Products, Categories){
   this.updateSearch = function(searchString){
-    Filters.searchString = searchString;
+    Filters.setFilter("searchString", searchString);
     Products.resetProducts();
     Products.resetPage();
     Products.fetchProducts();  
   }
 
   this.findCat = function(searchString){
-    Filters.category = null;
+    Filters.setFilter("category", null);
     var words = searchString.toLowerCase().split(" ");
     _(words).forEach(function(word){
-      if (Filters.category === null) {
+      if (Filters.getFilters().category === null) {
         _(Categories.list()).forEach(function(category){
-          if (Filters.category === null) {
+          if (Filters.getFilters().category === null) {
             if (category.name === word){
-              Filters.category = category.id;
+              Filters.setFilter("category", category.id);
             } else if (category.name.substring(0, category.name.length - 1) === word) {
-              Filters.category = category.id;
+              Filters.setFilter("category", parseInt(category.id));
             }
           }
         });
