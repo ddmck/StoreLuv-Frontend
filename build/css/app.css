@@ -6618,8 +6618,8 @@ th.hide-for-touch {
 .product-container {
   position: relative;
   width: 100%;
-  height: 300px;
-  background-size: auto 100%;
+  height: 291px;
+  background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   background-color: white;
