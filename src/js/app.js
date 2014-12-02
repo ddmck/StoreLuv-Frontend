@@ -123,8 +123,11 @@ app.controller('GenderController', ['Filters', 'Products', function(Filters, Pro
       Filters.setFilter("gender", "male");
     } else if ( gender === "womens") {
       Filters.setFilter("gender", "female");
+    } else if ( gender === "" ){
+      Filters.removeFilter("gender")
     }
     Products.resetProducts();
+    Products.resetPage()
     Products.fetchProducts();
   };
 }]);
