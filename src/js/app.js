@@ -8,6 +8,9 @@ app.factory('Filters', function(){
     },
     setFilter: function(name, value){
       filters[name] = value;
+    },
+    removeFilter: function(name){
+      delete filters[name];
     }       
   };
 });
@@ -22,6 +25,20 @@ app.factory('Categories', [ '$http', function($http){
     },
     list: function(){
       return categories;
+    }
+  }
+}]);
+
+app.factory('SubCategories', [ '$http', function($http){
+  var subCategories = [];
+  return {
+    fetchSubCategories: function(){
+      $http.get('sub_categories.json').success(function(data){
+        subCategories = data;
+      });
+    },
+    list: function(){
+      return subCategories;
     }
   }
 }]);
@@ -55,7 +72,7 @@ app.factory('Products', ['$http', 'Filters', function($http, Filters){
     },
     fetchProducts: function(){
       searching = true;
-      $http.get('products.json', {async: true, params: {page: page.toString(), gender: Filters.getFilters().gender, category: Filters.getFilters().category, search_string: Filters.getFilters().searchString}}).success(function(data){
+      $http.get('products.json', {async: true, params: {page: page.toString(), gender: Filters.getFilters().gender, category: Filters.getFilters().category, sub_category: Filters.getFilters().subCategory, search_string: Filters.getFilters().searchString}}).success(function(data){
         products = products.concat(data);
         scrollActive = true;
         searching = false;
@@ -120,7 +137,31 @@ app.controller('CategoryController', ['Filters', 'Products', 'Categories', funct
   this.filters = Filters;
 
   this.setCategory = function(cat_id){
-    Filters.setFilter("category", parseInt(cat_id));
+    if (cat_id === "") {
+      Filters.removeFilter("category");
+    } else {
+      Filters.setFilter("category", parseInt(cat_id));
+    }
+    Filters.removeFilter("subCategory");
+    Products.resetProducts();
+    Products.resetPage();
+    Products.fetchProducts();
+  };
+}]);
+
+app.controller('SubCategoryController', ['Filters', 'Products', 'Categories', 'SubCategories', function(Filters, Products, Categories, SubCategories){
+  var subCatCtrl = this;
+  subCatCtrl.subCategories = [];
+  SubCategories.fetchSubCategories();
+  subCatCtrl.subCategories = SubCategories;
+  this.filters = Filters;
+
+  this.setSubCat = function(sub_cat_id){
+    if (sub_cat_id === "") {
+      Filters.removeFilter("subCategory");
+    } else {
+      Filters.setFilter("subCategory", parseInt(sub_cat_id));
+    }
     Products.resetProducts();
     Products.resetPage();
     Products.fetchProducts();
@@ -132,7 +173,7 @@ app.controller('SearchController', ['Filters', 'Products', 'Categories', functio
     Filters.setFilter("searchString", searchString);
     Products.resetProducts();
     Products.resetPage();
-    Products.fetchProducts();  
+    Products.fetchProducts();
   }
 
   this.findCat = function(searchString){
