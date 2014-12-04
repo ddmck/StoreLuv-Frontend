@@ -109,7 +109,7 @@ app.controller('ProductsController',  ['$http', 'Filters', 'Products', function(
       scrollActive = false;
       Products.enumeratePage();
       
-      $http.get('products.json', {async: true, params: {page: Products.currentPage().toString(), gender: this.filters.getFilters().gender, category: this.filters.getFilters().category, search_string: Filters.getFilters().searchString}}).success(function(data){
+      $http.get('products.json', {async: true, params: {page: Products.currentPage().toString(), gender: this.filters.getFilters().gender, category: this.filters.getFilters().category, sub_category: Filters.getFilters().subCategory, search_string: Filters.getFilters().searchString}}).success(function(data){
         productCtrl.products.addProducts(data);
         scrollActive = true;
       });
