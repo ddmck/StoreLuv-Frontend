@@ -1,6 +1,6 @@
-var app = angular.module('App', ['infinite-scroll', 'ngSanitize'])
+var app = angular.module('App', ['infinite-scroll', 'ngSanitize', 'ngRoute'])
 
-app.factory('Filters', function(){
+app.factory('Filters', ['$location', function($location){
   var filters = {};
   return {
     getFilters: function(){
@@ -8,12 +8,17 @@ app.factory('Filters', function(){
     },
     setFilter: function(name, value){
       filters[name] = value;
+      $location.search(name, value);
     },
     removeFilter: function(name){
       delete filters[name];
-    }       
+      $location.search(name, null);
+    },
+    useQuery: function(query){
+      filters = query;
+    }      
   };
-});
+}]);
 
 app.factory('Categories', [ '$http', function($http){
   var categories = [];
@@ -43,7 +48,9 @@ app.factory('SubCategories', [ '$http', function($http){
   }
 }]);
 
-app.factory('Products', ['$http', 'Filters', function($http, Filters){
+app.factory('Products', ['$http', 'Filters', '$location', function($http, Filters, $location){
+  var query = $location.search();
+  Filters.useQuery(query);
   var factory = this;
   var products = [];
   var page = 1;
@@ -89,12 +96,14 @@ app.controller('ProductsController',  ['$http', 'Filters', 'Products', function(
 
   this.filters = Filters;
   
+  // Products.fetchProducts();
 
   $http.get('products.json', {params: { 
                                                               page: Products.currentPage().toString(), 
-                                                              gender: this.filters.gender, 
-                                                              category: this.filters.category, 
-                                                              search_string: Filters.searchString}
+                                                              gender: this.filters.getFilters().gender, 
+                                                              category: this.filters.getFilters().category,
+                                                              sub_category: this.filters.getFilters().subCategory, 
+                                                              search_string: this.filters.getFilters().searchString}
                                                             }).success(function(data){
     productCtrl.products.addProducts(data);
     scrollActive = true;
@@ -180,14 +189,14 @@ app.controller('SearchController', ['Filters', 'Products', 'Categories', functio
   }
 
   this.findCat = function(searchString){
-    Filters.setFilter("category", null);
+    Filters.removeFilter("category");
     var words = searchString.toLowerCase().split(" ");
     _(words).forEach(function(word){
-      if (Filters.getFilters().category === null) {
+      if (Filters.getFilters().category === undefined) {
         _(Categories.list()).forEach(function(category){
-          if (Filters.getFilters().category === null) {
+          if (Filters.getFilters().category === undefined) {
             if (category.name === word){
-              Filters.setFilter("category", category.id);
+              Filters.setFilter("category", parseInt(category.id));
             } else if (category.name.substring(0, category.name.length - 1) === word) {
               Filters.setFilter("category", parseInt(category.id));
             }
