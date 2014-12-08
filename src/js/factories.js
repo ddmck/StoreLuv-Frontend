@@ -14,8 +14,11 @@ factories.factory('Filters',['$location', function($location){
       delete filters[name];
       $location.search(name, null);
     },
-    useQuery: function(query){
-      filters = query;
+    setMultipleFilters: function(hash){
+      filters = hash;
+    },
+    resetAll: function(){
+      filters = {};
     }           
   };
 }]);
