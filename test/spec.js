@@ -2,22 +2,23 @@ var expect = chai.expect;
 
 describe("Filters", function(){
 
-  beforeEach(module('App'));
+  beforeEach(module('factories'));
 
-  var filters;
+  var Filters;
+  var $location;
 
-  beforeEach(inject(function(_filters_){
-    filters = _filters_;
+  beforeEach(inject(function(_Filters_, _$location_){
+    Filters = _Filters_;
+    $location = _$location_;
   }));
 
   it('should initially return an empty hash', function(){
     // Arrange
-    // var result;
+    var result;
     // Act
-    // var result = filters.getFilters();
+    var result = Filters.getFilters();
     // Assert
-    // var expected = {};
-    expect(true).to.equal(true);
+    expect(Filters.getFilters()).to.be.empty();
   });
 });
 

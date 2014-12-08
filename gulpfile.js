@@ -33,15 +33,15 @@ gulp.task('sass', function() {
 
 gulp.task('scripts', function() {
     // Single entry point to browserify
-    gulp.src('src/js/app.js')
+    gulp.src('src/js/factories.js')
       .pipe(plumber({
         errorHandler: onError
       }))
-      .pipe(browserify({
-        transform: [browserifyHandlebars],
-        insertGlobals : true,
-        debug : !gulp.env.production
-      }))
+      // .pipe(browserify({
+      //   transform: [browserifyHandlebars],
+      //   insertGlobals : true,
+      //   debug : !gulp.env.production
+      // }))
       // .pipe(uglify())
       .pipe(gulp.dest('./build/js'))
       .pipe(connect.reload());

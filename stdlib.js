@@ -7,7 +7,7 @@ module.exports =
     files: [
       resolve('jquery'),
       resolve('jquery.cookie'),
-      resolve('angular.min'),
+      resolve('angular'),
       resolve('angular-route'),
       resolve('angular-sanitize'),
       resolve('fastclick'),
