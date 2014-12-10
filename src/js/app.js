@@ -186,11 +186,14 @@ app.controller('SubCategoryController', ['Filters', 'Products', 'Categories', 'S
 
 app.controller('SearchController', ['Filters', 'Products', 'Categories', function(Filters, Products, Categories){
   this.updateSearch = function(searchString){
-    Filters.setFilter("searchString", searchString);
-    Products.resetProducts();
-    Products.resetPage();
-    Products.fetchProducts();
-
+    if (searchString === null || searchString === undefined || searchString === '' || searchString === ' ') {
+      return
+    } else {
+      Filters.setFilter("searchString", searchString);
+      Products.resetProducts();
+      Products.resetPage();
+      Products.fetchProducts();
+    }
   }
 
   this.findCat = function(searchString){
