@@ -12,10 +12,13 @@ app.factory('Filters', ['$location', function($location){
     },
     removeFilter: function(name){
       delete filters[name];
-      $location.search(name, null);
     },
     useQuery: function(query){
       filters = query;
+      $location.search(filters);
+    },
+    updateUrl: function(){
+      $location.search(filters);
     }      
   };
 }]);
@@ -50,6 +53,7 @@ app.factory('SubCategories', [ '$http', function($http){
 
 app.factory('Products', ['$http', 'Filters', '$location', function($http, Filters, $location){
   var query = $location.search();
+  $location.search({});
   Filters.useQuery(query);
   var factory = this;
   var products = [];
@@ -183,13 +187,16 @@ app.controller('SubCategoryController', ['Filters', 'Products', 'Categories', 'S
 app.controller('SearchController', ['Filters', 'Products', 'Categories', function(Filters, Products, Categories){
   this.updateSearch = function(searchString){
     Filters.setFilter("searchString", searchString);
+    Filters.updateUrl();
     Products.resetProducts();
     Products.resetPage();
     Products.fetchProducts();
+
   }
 
   this.findCat = function(searchString){
     Filters.removeFilter("category");
+    Filters.removeFilter("subCategory");
     var words = searchString.toLowerCase().split(" ");
     _(words).forEach(function(word){
       if (Filters.getFilters().category === undefined) {
