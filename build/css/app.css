@@ -6702,10 +6702,7 @@ th.hide-for-touch {
             transition: background-color 300ms ease-out;
     position: absolute;
     top: 10px;
-    left: 100%;
-    -webkit-transform: translateX(calc(-100% - 10px));
-        -ms-transform: translateX(calc(-100% - 10px));
-            transform: translateX(calc(-100% - 10px));
+    left: 10px;
     -webkit-transition: opacity 0.25s linear;
             transition: opacity 0.25s linear; }
     @media only screen and (max-width: 64em) {
