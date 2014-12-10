@@ -1,7 +1,9 @@
 var app = angular.module('App', ['infinite-scroll', 'ngSanitize', 'ngRoute'])
 
 app.factory('Filters', ['$location', function($location){
-  var filters = {};
+  // Hacky way to prevent location being set to empty string causing refresh
+  var filters = {a: "b"};
+
   return {
     getFilters: function(){
       return filters;
@@ -12,12 +14,11 @@ app.factory('Filters', ['$location', function($location){
     },
     removeFilter: function(name){
       delete filters[name];
+      $location.search(name, null);
     },
     useQuery: function(query){
       filters = query;
-      $location.search(filters);
-    },
-    updateUrl: function(){
+      filters.a = "b";
       $location.search(filters);
     }      
   };
@@ -53,7 +54,6 @@ app.factory('SubCategories', [ '$http', function($http){
 
 app.factory('Products', ['$http', 'Filters', '$location', function($http, Filters, $location){
   var query = $location.search();
-  $location.search({});
   Filters.useQuery(query);
   var factory = this;
   var products = [];
@@ -187,7 +187,6 @@ app.controller('SubCategoryController', ['Filters', 'Products', 'Categories', 'S
 app.controller('SearchController', ['Filters', 'Products', 'Categories', function(Filters, Products, Categories){
   this.updateSearch = function(searchString){
     Filters.setFilter("searchString", searchString);
-    Filters.updateUrl();
     Products.resetProducts();
     Products.resetPage();
     Products.fetchProducts();
