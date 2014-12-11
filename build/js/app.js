@@ -18,13 +18,22 @@ app.factory('Filters', ['$location', function($location){
     },
     removeFilter: function(name){
       delete filters[name];
+      if (_.isEmpty(filters)) {
+        filters.a = "b";
+      }
       $location.search(name, null);
     },
     useQuery: function(query){
       filters = query;
-      filters.a = "b";
+      if (_.isEmpty(filters)) {
+        filters.a = "b";
+      }
       $location.search(filters);
-    }      
+    },
+    resetAll: function(){
+      filters = {a: "b"};
+      $location.search(filters);
+    }         
   };
 }]);
 
