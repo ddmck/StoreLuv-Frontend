@@ -1,5 +1,9 @@
 var app = angular.module('App', ['infinite-scroll', 'ngSanitize', 'ngRoute'])
 
+app.config(function($routeProvider, $locationProvider) {
+  $locationProvider.hashPrefix('!');
+});
+
 app.factory('Filters', ['$location', function($location){
   // Hacky way to prevent location being set to empty string causing refresh
   var filters = {a: "b"};
