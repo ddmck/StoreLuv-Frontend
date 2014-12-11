@@ -6,7 +6,7 @@ app.config(function($routeProvider, $locationProvider) {
 
 app.factory('Filters', ['$location', function($location){
   // Hacky way to prevent location being set to empty string causing refresh
-  var filters = {a: "b"};
+  var filters = {};
 
   return {
     getFilters: function(){
@@ -19,20 +19,22 @@ app.factory('Filters', ['$location', function($location){
     removeFilter: function(name){
       delete filters[name];
       if (_.isEmpty(filters)) {
-        filters.a = "b";
+        $location.url($location.path())
+      } else {
+        $location.search(name, null);
       }
-      $location.search(name, null);
     },
     useQuery: function(query){
       filters = query;
       if (_.isEmpty(filters)) {
-        filters.a = "b";
+        $location.url($location.path())
+      } else {
+        $location.search(filters);
       }
-      $location.search(filters);
     },
     resetAll: function(){
-      filters = {a: "b"};
-      $location.search(filters);
+      filters = {};
+      $location.url($location.path())
     }         
   };
 }]);
