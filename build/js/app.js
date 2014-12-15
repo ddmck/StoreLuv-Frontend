@@ -1,7 +1,9 @@
 var app = angular.module('App', ['infinite-scroll', 'ngSanitize', 'ngRoute'])
 
 app.config(function($routeProvider, $locationProvider) {
-  $locationProvider.hashPrefix('!');
+  // $locationProvider.hashPrefix('!');
+  $locationProvider.html5Mode({ enabled: true});
+  // $location.path('/');
 });
 
 app.factory('Filters', ['$location', function($location){
