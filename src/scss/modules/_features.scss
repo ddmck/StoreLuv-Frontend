@@ -23,7 +23,7 @@
     // background-repeat: repeat-x;
     .feature-copy-card {
       width: 50%;
-      max-height: calc(100% - 100px);
+      max-height: 400px;
       margin-top: 50px; 
       background-color: rgba($blue, 0.5);
       padding: 10px;
@@ -33,7 +33,7 @@
         max-height: calc(100% - 20px);
         margin: 10px;
       }
-      .feature-title, .feature-copy {
+      .feature-title, .feature-copy, a {
         color: $white;
       }
       .feature-title {
@@ -41,6 +41,11 @@
       }
       .feature-copy{
         font-family: $font-family-serif;
+        max-height: 10rem;
+        overflow: scroll
+      }
+      a {
+        text-decoration: underline;
       }
     }
   }  
