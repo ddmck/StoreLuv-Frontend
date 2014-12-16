@@ -10,6 +10,7 @@ module.exports =
       resolve('angular'),
       resolve('angular-route'),
       resolve('angular-sanitize'),
+      resolve('devise'),
       resolve('fastclick'),
       resolve('modernizr'),
       resolve('foundation.min'),

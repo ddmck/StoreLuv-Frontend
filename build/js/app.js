@@ -1,4 +1,8 @@
-var app = angular.module('App', ['infinite-scroll', 'ngSanitize', 'ngRoute'])
+var app = angular.module('App', ['infinite-scroll', 'ngSanitize', 'ngRoute', 'Devise'])
+
+app.config(function(AuthProvider) {
+    // Configure Auth service with AuthProvider
+});
 
 app.config(function($routeProvider, $locationProvider) {
   // $locationProvider.hashPrefix('!');
@@ -108,6 +112,38 @@ app.factory('Products', ['$http', 'Filters', '$location', function($http, Filter
     }
   };
 }]);
+
+app.controller('AuthController', function(Auth, $scope) {
+  var credentials = {
+    username: 'admin',
+    password: '1234'
+  };
+
+  $scope.openModal = function(){
+    $scope.modalStatus = true;
+  }
+  $scope.closeModal = function(){
+    $scope.modalStatus = false;
+  }
+  $scope.modal = function(){
+    return $scope.modalStatus;
+  }
+  $scope.modalStatus = false;
+
+  Auth.login(credentials).then(function(user) {
+    console.log(user); // => {id: 1, ect: '...'}
+  }, function(error) {
+      // Authentication failed...
+  });
+
+  $scope.$on('devise:login', function(event, currentUser) {
+    // after a login, a hard refresh, a new tab
+  });
+
+  $scope.$on('devise:new-session', function(event, currentUser) {
+    // user logged in by Auth.login({...})
+  });
+});
 
 app.controller('ProductsController',  ['$http', 'Filters', 'Products', function($http, Filters, Products){
   this.scrollActive = false;
