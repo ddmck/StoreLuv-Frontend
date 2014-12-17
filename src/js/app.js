@@ -1,4 +1,4 @@
-var app = angular.module('App', ['infinite-scroll', 'ngSanitize', 'ngRoute', 'ng-token-auth'])
+var app = angular.module('App', ['infinite-scroll', 'ngSanitize', 'ngRoute', 'ng-token-auth', 'ipCookie'])
 
 app.config(function($routeProvider, $locationProvider) {
   // $locationProvider.hashPrefix('!');
@@ -108,6 +108,28 @@ app.factory('Products', ['$http', 'Filters', '$location', function($http, Filter
     }
   };
 }]);
+
+app.controller('UserSessionsController', ['$scope', function ($scope) {
+  console.log("Hey from users controller");
+  $scope.$on('auth:login-error', function(ev, reason) { 
+    $scope.error = reason.errors[0]; 
+  });
+}]);
+
+app.controller('UserRegistrationsController', ['$scope', '$auth', function($scope, $auth) {
+  $scope.handleRegBtnClick = function() {
+    $auth.submitRegistration($scope.registrationForm)
+      .then(function(resp) { 
+        console.log("Victory");
+        console.table(resp);
+      })
+      .catch(function(resp) { 
+        console.log("Failure");
+        console.table(resp);
+      });
+    };
+}]);
+
 
 app.controller('ProductsController',  ['$http', 'Filters', 'Products', function($http, Filters, Products){
   this.scrollActive = false;
