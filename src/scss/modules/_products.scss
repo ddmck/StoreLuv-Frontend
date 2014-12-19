@@ -63,24 +63,29 @@
     }
   }
 
-  .buy-button {
+  .buy-button, .wish-button {
     opacity: 0;
     @media only screen and (max-width: 64em) { 
       opacity: 1;
     }
     @include button(rem-calc(4), $purple);
-    position:absolute;
-
-    top: 10px;
+    min-width: 50px;
+    position: absolute;
     left: 10px;
     // transform: translateX(calc(-100% - 10px));
     transition: opacity 0.25s linear;
   }
+  .buy-button { 
+    top: 10px;
+  }
+  .wish-button {
+    top: 45px;
+  }
 
   @media only screen and (min-width: 64.063em) {
     &:hover {
-      .buy-button {
-        opacity: 1;
+      .buy-button, .wish-button {
+        opacity: 0.8;
         transition: opacity 0.25s linear;
       }
       .product-description {

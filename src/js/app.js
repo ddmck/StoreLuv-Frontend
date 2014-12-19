@@ -114,18 +114,38 @@ app.controller('UserSessionsController', ['$scope', function ($scope) {
   $scope.$on('auth:login-error', function(ev, reason) { 
     $scope.error = reason.errors[0]; 
   });
+
+  $scope.$on('auth:login-success', function(ev){
+    $('#signInModal').foundation('reveal', 'close');
+  });
+  $scope.handleLoginBtnClick = function() {
+    $auth.submitLogin($scope.loginForm)
+      .then(function(resp) {
+
+      })
+      .catch(function(resp) { 
+        // handle error response
+      });
+  };
 }]);
 
 app.controller('UserRegistrationsController', ['$scope', '$auth', function($scope, $auth) {
+  $scope.$on('auth:registration-email-success', function(ev, message){
+    $('#signUpModal').foundation('reveal', 'close');
+    console.log(message);
+    $auth.submitLogin({
+      email: $scope.registrationForm.email,
+      password: $scope.registrationForm.password
+    });
+  });
+
   $scope.handleRegBtnClick = function() {
     $auth.submitRegistration($scope.registrationForm)
       .then(function(resp) { 
-        console.log("Victory");
-        console.table(resp);
+        
       })
       .catch(function(resp) { 
-        console.log("Failure");
-        console.table(resp);
+        
       });
     };
 }]);
@@ -142,18 +162,34 @@ app.controller('ProductsController',  ['$http', 'Filters', 'Products', function(
   // Products.fetchProducts();
 
   $http.get('products.json', {params: { 
-                                                              page: Products.currentPage().toString(), 
-                                                              gender: this.filters.getFilters().gender, 
-                                                              category: this.filters.getFilters().category,
-                                                              sub_category: this.filters.getFilters().subCategory, 
-                                                              search_string: this.filters.getFilters().searchString}
-                                                            }).success(function(data){
+                                page: Products.currentPage().toString(), 
+                                gender: this.filters.getFilters().gender, 
+                                category: this.filters.getFilters().category,
+                                sub_category: this.filters.getFilters().subCategory, 
+                                search_string: this.filters.getFilters().searchString}
+                              }).success(function(data){
     productCtrl.products.addProducts(data);
     scrollActive = true;
   });
 
-  this.openLink = function(product){
+  this.wishFor = function(product, userId){
+    if (!userId) {
+      $('#signInModal').foundation('reveal', 'open');
+    } else {
+      $http.post('products/' + product.id + '/wish.json', {} ).success(function(data){
+        alert("wished for!");
+      });  
+    }
+    
+  };                            
+
+
+  this.openLink = function(product, userId){
+
     window.open(product.url,'_blank');
+    if (!userId) {
+      $('#signUpModal').foundation('reveal', 'open');
+    }
   };
 
   this.nextPage = function(products){
@@ -256,7 +292,3 @@ app.controller('SearchController', ['Filters', 'Products', 'Categories', functio
   };
 
 }]);
-
-
-
-
