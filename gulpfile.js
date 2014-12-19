@@ -1,7 +1,5 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
-var browserify = require('gulp-browserify');
-var browserifyHandlebars = require('browserify-handlebars');
 var uglify = require('gulp-uglify');
 var rev = require('gulp-rev');
 var concat = require('gulp-concat');
@@ -13,6 +11,7 @@ var gutil = require('gulp-util');
 var s3 = require("gulp-s3");
 var fs = require('fs');
 var aws = JSON.parse(fs.readFileSync('./aws.json'));
+var mocha = require('gulp-mocha');
 
 
 var onError = function (err) {
@@ -26,7 +25,7 @@ gulp.task('sass', function() {
       errorHandler: onError
     }))
     .pipe(sass())
-    .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1'))
+    .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 9', 'opera 12.1'))
     .pipe(gulp.dest('./build/css'))
     .pipe(connect.reload());
 });
@@ -37,11 +36,11 @@ gulp.task('scripts', function() {
       .pipe(plumber({
         errorHandler: onError
       }))
-      .pipe(browserify({
-        transform: [browserifyHandlebars],
-        insertGlobals : true,
-        debug : !gulp.env.production
-      }))
+      // .pipe(browserify({
+      //   transform: [browserifyHandlebars],
+      //   insertGlobals : true,
+      //   debug : !gulp.env.production
+      // }))
       // .pipe(uglify())
       .pipe(gulp.dest('./build/js'))
       .pipe(connect.reload());
@@ -94,6 +93,11 @@ gulp.task('connect', function() {
 gulp.task('deploy', function(){
   gulp.src('./build/**')
     .pipe(s3(aws, {headers: {'Cache-Control': 'max-age=315360000, no-transform, public'}}));
+});
+
+gulp.task('test', function () {
+    return gulp.src('test/spec.js', {read: false})
+        .pipe(mocha({reporter: 'nyan'}));
 });
 
 gulp.task('default', ['connect', 'watch']);

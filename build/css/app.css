@@ -1241,9 +1241,9 @@ select {
     border-color: #de2b0f;
     color: #FFFFFF; }
   .alert-box.secondary {
-    background-color: #e7e7e7;
-    border-color: #c7c7c7;
-    color: #4f4f4f; }
+    background-color: #2A79A2;
+    border-color: #24698b;
+    color: #FFFFFF; }
   .alert-box.warning {
     background-color: #f08a24;
     border-color: #de770f;
@@ -1251,7 +1251,7 @@ select {
   .alert-box.info {
     background-color: #a0d3e8;
     border-color: #74bfdd;
-    color: #4f4f4f; }
+    color: #0e2937; }
   .alert-box.alert-close {
     opacity: 0; }
 
@@ -2238,8 +2238,8 @@ select {
   list-style: none;
   border-style: solid;
   border-width: 1px;
-  background-color: #f4f4f4;
-  border-color: #dcdcdc;
+  background-color: #92c8e3;
+  border-color: #74b9db;
   border-radius: 3px; }
   .breadcrumbs > * {
     margin: 0;
@@ -2311,13 +2311,13 @@ button, .button {
   button:hover, button:focus, .button:hover, .button:focus {
     color: #FFFFFF; }
   button.secondary, .button.secondary {
-    background-color: #e7e7e7;
-    border-color: #b9b9b9;
-    color: #333333; }
+    background-color: #2A79A2;
+    border-color: #226282;
+    color: #FFFFFF; }
     button.secondary:hover, button.secondary:focus, .button.secondary:hover, .button.secondary:focus {
-      background-color: #b9b9b9; }
+      background-color: #226282; }
     button.secondary:hover, button.secondary:focus, .button.secondary:hover, .button.secondary:focus {
-      color: #333333; }
+      color: #FFFFFF; }
   button.success, .button.success {
     background-color: #43AC6A;
     border-color: #368a54;
@@ -2397,19 +2397,19 @@ button, .button {
     button.disabled:hover, button.disabled:focus, button[disabled]:hover, button[disabled]:focus, .button.disabled:hover, .button.disabled:focus, .button[disabled]:hover, .button[disabled]:focus {
       background-color: #8C0343; }
     button.disabled.secondary, button[disabled].secondary, .button.disabled.secondary, .button[disabled].secondary {
-      background-color: #e7e7e7;
-      border-color: #b9b9b9;
-      color: #333333;
+      background-color: #2A79A2;
+      border-color: #226282;
+      color: #FFFFFF;
       cursor: default;
       opacity: 0.7;
       -webkit-box-shadow: none;
               box-shadow: none; }
       button.disabled.secondary:hover, button.disabled.secondary:focus, button[disabled].secondary:hover, button[disabled].secondary:focus, .button.disabled.secondary:hover, .button.disabled.secondary:focus, .button[disabled].secondary:hover, .button[disabled].secondary:focus {
-        background-color: #b9b9b9; }
+        background-color: #226282; }
       button.disabled.secondary:hover, button.disabled.secondary:focus, button[disabled].secondary:hover, button[disabled].secondary:focus, .button.disabled.secondary:hover, .button.disabled.secondary:focus, .button[disabled].secondary:hover, .button[disabled].secondary:focus {
-        color: #333333; }
+        color: #FFFFFF; }
       button.disabled.secondary:hover, button.disabled.secondary:focus, button[disabled].secondary:hover, button[disabled].secondary:focus, .button.disabled.secondary:hover, .button.disabled.secondary:focus, .button[disabled].secondary:hover, .button[disabled].secondary:focus {
-        background-color: #e7e7e7; }
+        background-color: #2A79A2; }
     button.disabled.success, button[disabled].success, .button.disabled.success, .button[disabled].success {
       background-color: #43AC6A;
       border-color: #368a54;
@@ -3955,8 +3955,8 @@ label.error {
     background-color: #43AC6A;
     color: #FFFFFF; }
   .label.secondary {
-    background-color: #e7e7e7;
-    color: #333333; }
+    background-color: #2A79A2;
+    color: #FFFFFF; }
   .label.info {
     background-color: #a0d3e8;
     color: #333333; }
@@ -4345,7 +4345,7 @@ ul.pagination {
     height: 100%;
     display: block; }
   .progress.secondary .meter {
-    background: #e7e7e7;
+    background: #2A79A2;
     height: 100%;
     display: block; }
   .progress.success .meter {
@@ -4427,7 +4427,7 @@ ul.pagination {
   display: inline-block;
   position: absolute;
   height: 0.875rem;
-  background: #e5e5e5; }
+  background: #2a79a0; }
 
 .range-slider-handle {
   display: inline-block;
@@ -5199,13 +5199,13 @@ meta.foundation-mq-topbar {
         .top-bar-section ul li > a.button:hover, .top-bar-section ul li > a.button:focus {
           color: #FFFFFF; }
       .top-bar-section ul li > a.button.secondary {
-        background-color: #e7e7e7;
-        border-color: #b9b9b9;
-        color: #333333; }
+        background-color: #2A79A2;
+        border-color: #226282;
+        color: #FFFFFF; }
         .top-bar-section ul li > a.button.secondary:hover, .top-bar-section ul li > a.button.secondary:focus {
-          background-color: #b9b9b9; }
+          background-color: #226282; }
         .top-bar-section ul li > a.button.secondary:hover, .top-bar-section ul li > a.button.secondary:focus {
-          color: #333333; }
+          color: #FFFFFF; }
       .top-bar-section ul li > a.button.success {
         background-color: #43AC6A;
         border-color: #368a54;
@@ -5242,13 +5242,13 @@ meta.foundation-mq-topbar {
       .top-bar-section ul li > button:hover, .top-bar-section ul li > button:focus {
         color: #FFFFFF; }
       .top-bar-section ul li > button.secondary {
-        background-color: #e7e7e7;
-        border-color: #b9b9b9;
-        color: #333333; }
+        background-color: #2A79A2;
+        border-color: #226282;
+        color: #FFFFFF; }
         .top-bar-section ul li > button.secondary:hover, .top-bar-section ul li > button.secondary:focus {
-          background-color: #b9b9b9; }
+          background-color: #226282; }
         .top-bar-section ul li > button.secondary:hover, .top-bar-section ul li > button.secondary:focus {
-          color: #333333; }
+          color: #FFFFFF; }
       .top-bar-section ul li > button.success {
         background-color: #43AC6A;
         border-color: #368a54;
@@ -5733,10 +5733,10 @@ code {
   font-family: Consolas, "Liberation Mono", Courier, monospace;
   font-weight: normal;
   color: #333333;
-  background-color: #f8f8f8;
+  background-color: #b6daec;
   border-width: 1px;
   border-style: solid;
-  border-color: #dfdfdf;
+  border-color: #95c9e3;
   padding: 0.125rem 0.3125rem 0.0625rem; }
 
 /* Lists */
@@ -6676,7 +6676,7 @@ th.hide-for-touch {
           -ms-transform: translateX(calc(-100% - 10px));
               transform: translateX(calc(-100% - 10px));
       line-height: 60px; }
-  .product-container .buy-button {
+  .product-container .buy-button, .product-container .wish-button {
     opacity: 0;
     border-style: solid;
     border-width: 0px;
@@ -6700,24 +6700,25 @@ th.hide-for-touch {
     color: #FFFFFF;
     -webkit-transition: background-color 300ms ease-out;
             transition: background-color 300ms ease-out;
+    min-width: 50px;
     position: absolute;
-    top: 10px;
-    left: 100%;
-    -webkit-transform: translateX(calc(-100% - 10px));
-        -ms-transform: translateX(calc(-100% - 10px));
-            transform: translateX(calc(-100% - 10px));
+    left: 10px;
     -webkit-transition: opacity 0.25s linear;
             transition: opacity 0.25s linear; }
     @media only screen and (max-width: 64em) {
-      .product-container .buy-button {
+      .product-container .buy-button, .product-container .wish-button {
         opacity: 1; } }
-    .product-container .buy-button:hover, .product-container .buy-button:focus {
+    .product-container .buy-button:hover, .product-container .buy-button:focus, .product-container .wish-button:hover, .product-container .wish-button:focus {
       background-color: #700237; }
-    .product-container .buy-button:hover, .product-container .buy-button:focus {
+    .product-container .buy-button:hover, .product-container .buy-button:focus, .product-container .wish-button:hover, .product-container .wish-button:focus {
       color: #FFFFFF; }
+  .product-container .buy-button {
+    top: 10px; }
+  .product-container .wish-button {
+    top: 45px; }
   @media only screen and (min-width: 64.063em) {
-    .product-container:hover .buy-button {
-      opacity: 1;
+    .product-container:hover .buy-button, .product-container:hover .wish-button {
+      opacity: 0.8;
       -webkit-transition: opacity 0.25s linear;
               transition: opacity 0.25s linear; }
     .product-container:hover .product-description {
@@ -6756,6 +6757,82 @@ th.hide-for-touch {
   text-align: center; }
   .no-results .fa {
     color: #8C0343; }
+
+.feature-hero {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  background-color: rgba(42, 121, 162, 0.25);
+  background-image: url('https://s3-eu-west-1.amazonaws.com/storeluv/storeluv-landing.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin-bottom: 20px;
+  -webkit-box-shadow: 0px 2px 5px 0px rgba(39, 39, 39, 0.5);
+          box-shadow: 0px 2px 5px 0px rgba(39, 39, 39, 0.5); }
+  @media only screen and (max-width: 64.063em) {
+    .feature-hero {
+      margin-top: 0px;
+      height: 300px; } }
+  .feature-hero .feature-transparency {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(42, 121, 162, 0.25); }
+    .feature-hero .feature-transparency .feature-copy-card {
+      width: 50%;
+      max-height: 400px;
+      margin-top: 50px;
+      background-color: rgba(42, 121, 162, 0.5);
+      padding: 10px;
+      overflow-y: scroll; }
+      @media only screen and (max-width: 64.063em) {
+        .feature-hero .feature-transparency .feature-copy-card {
+          width: calc(100% - 20px);
+          max-height: calc(100% - 20px);
+          margin: 10px; } }
+      .feature-hero .feature-transparency .feature-copy-card .feature-title, .feature-hero .feature-transparency .feature-copy-card .feature-copy, .feature-hero .feature-transparency .feature-copy-card a {
+        color: #FFFFFF; }
+      .feature-hero .feature-transparency .feature-copy-card .feature-title {
+        font-weight: bold; }
+      .feature-hero .feature-transparency .feature-copy-card .feature-copy {
+        font-family: "PT Serif", Georgia, Cambria, "Times New Roman", Times, serif;
+        max-height: 10rem;
+        overflow: scroll; }
+      .feature-hero .feature-transparency .feature-copy-card a {
+        text-decoration: underline; }
+
+.call-to-action {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  background-image: url('https://s3-eu-west-1.amazonaws.com/storeluv/call-to-action.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  -webkit-box-shadow: 0px 2px 5px 0px rgba(39, 39, 39, 0.5);
+          box-shadow: 0px 2px 5px 0px rgba(39, 39, 39, 0.5); }
+  @media only screen and (max-width: 64.063em) {
+    .call-to-action {
+      height: 300px; } }
+  .call-to-action .call-to-action-transparency {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(170, 40, 45, 0.25); }
+    .call-to-action .call-to-action-transparency .call-to-action-card {
+      padding-top: 50px; }
+      @media only screen and (max-width: 64.063em) {
+        .call-to-action .call-to-action-transparency .call-to-action-card {
+          padding: 15px; } }
+      .call-to-action .call-to-action-transparency .call-to-action-card .call-to-action-header, .call-to-action .call-to-action-transparency .call-to-action-card .call-to-action-copy, .call-to-action .call-to-action-transparency .call-to-action-card form {
+        max-width: 50%;
+        color: #FFFFFF; }
+        @media only screen and (max-width: 50.063em) {
+          .call-to-action .call-to-action-transparency .call-to-action-card .call-to-action-header, .call-to-action .call-to-action-transparency .call-to-action-card .call-to-action-copy, .call-to-action .call-to-action-transparency .call-to-action-card form {
+            max-width: 100%; } }
+      .call-to-action .call-to-action-transparency .call-to-action-card .call-to-action-header {
+        font-weight: bold; }
+      .call-to-action .call-to-action-transparency .call-to-action-card .call-to-action-copy {
+        font-family: "PT Serif", Georgia, Cambria, "Times New Roman", Times, serif; }
 
 html {
   -webkit-font-smoothing: antialiased; }

@@ -1,7 +1,15 @@
-var app = angular.module('App', ['infinite-scroll', 'ngSanitize', 'ngRoute'])
+var app = angular.module('App', ['infinite-scroll', 'ngSanitize', 'ngRoute', 'ng-token-auth', 'ipCookie'])
+
+app.config(function($routeProvider, $locationProvider) {
+  // $locationProvider.hashPrefix('!');
+  $locationProvider.html5Mode({ enabled: true});
+  // $location.path('/');
+});
 
 app.factory('Filters', ['$location', function($location){
+  // Hacky way to prevent location being set to empty string causing refresh
   var filters = {};
+
   return {
     getFilters: function(){
       return filters;
@@ -12,11 +20,24 @@ app.factory('Filters', ['$location', function($location){
     },
     removeFilter: function(name){
       delete filters[name];
-      $location.search(name, null);
+      if (_.isEmpty(filters)) {
+        $location.url($location.path())
+      } else {
+        $location.search(name, null);
+      }
     },
     useQuery: function(query){
       filters = query;
-    }      
+      if (_.isEmpty(filters)) {
+        $location.url($location.path())
+      } else {
+        $location.search(filters);
+      }
+    },
+    resetAll: function(){
+      filters = {};
+      $location.url($location.path())
+    }         
   };
 }]);
 
@@ -88,6 +109,48 @@ app.factory('Products', ['$http', 'Filters', '$location', function($http, Filter
   };
 }]);
 
+app.controller('UserSessionsController', ['$scope', function ($scope) {
+  console.log("Hey from users controller");
+  $scope.$on('auth:login-error', function(ev, reason) { 
+    $scope.error = reason.errors[0]; 
+  });
+
+  $scope.$on('auth:login-success', function(ev){
+    $('#signInModal').foundation('reveal', 'close');
+  });
+  $scope.handleLoginBtnClick = function() {
+    $auth.submitLogin($scope.loginForm)
+      .then(function(resp) {
+
+      })
+      .catch(function(resp) { 
+        // handle error response
+      });
+  };
+}]);
+
+app.controller('UserRegistrationsController', ['$scope', '$auth', function($scope, $auth) {
+  $scope.$on('auth:registration-email-success', function(ev, message){
+    $('#signUpModal').foundation('reveal', 'close');
+    console.log(message);
+    $auth.submitLogin({
+      email: $scope.registrationForm.email,
+      password: $scope.registrationForm.password
+    });
+  });
+
+  $scope.handleRegBtnClick = function() {
+    $auth.submitRegistration($scope.registrationForm)
+      .then(function(resp) { 
+        
+      })
+      .catch(function(resp) { 
+        
+      });
+    };
+}]);
+
+
 app.controller('ProductsController',  ['$http', 'Filters', 'Products', function($http, Filters, Products){
   this.scrollActive = false;
   var scrollActive = this.scrollActive;
@@ -99,18 +162,34 @@ app.controller('ProductsController',  ['$http', 'Filters', 'Products', function(
   // Products.fetchProducts();
 
   $http.get('products.json', {params: { 
-                                                              page: Products.currentPage().toString(), 
-                                                              gender: this.filters.getFilters().gender, 
-                                                              category: this.filters.getFilters().category,
-                                                              sub_category: this.filters.getFilters().subCategory, 
-                                                              search_string: this.filters.getFilters().searchString}
-                                                            }).success(function(data){
+                                page: Products.currentPage().toString(), 
+                                gender: this.filters.getFilters().gender, 
+                                category: this.filters.getFilters().category,
+                                sub_category: this.filters.getFilters().subCategory, 
+                                search_string: this.filters.getFilters().searchString}
+                              }).success(function(data){
     productCtrl.products.addProducts(data);
     scrollActive = true;
   });
 
-  this.openLink = function(product){
+  this.wishFor = function(product, userId){
+    if (!userId) {
+      $('#signInModal').foundation('reveal', 'open');
+    } else {
+      $http.post('products/' + product.id + '/wish.json', {} ).success(function(data){
+        alert("wished for!");
+      });  
+    }
+    
+  };                            
+
+
+  this.openLink = function(product, userId){
+
     window.open(product.url,'_blank');
+    if (!userId) {
+      $('#signUpModal').foundation('reveal', 'open');
+    }
   };
 
   this.nextPage = function(products){
@@ -182,14 +261,19 @@ app.controller('SubCategoryController', ['Filters', 'Products', 'Categories', 'S
 
 app.controller('SearchController', ['Filters', 'Products', 'Categories', function(Filters, Products, Categories){
   this.updateSearch = function(searchString){
-    Filters.setFilter("searchString", searchString);
-    Products.resetProducts();
-    Products.resetPage();
-    Products.fetchProducts();
+    if (searchString === null || searchString === undefined || searchString === '' || searchString === ' ') {
+      return
+    } else {
+      Filters.setFilter("searchString", searchString);
+      Products.resetProducts();
+      Products.resetPage();
+      Products.fetchProducts();
+    }
   }
 
   this.findCat = function(searchString){
     Filters.removeFilter("category");
+    Filters.removeFilter("subCategory");
     var words = searchString.toLowerCase().split(" ");
     _(words).forEach(function(word){
       if (Filters.getFilters().category === undefined) {
@@ -208,7 +292,3 @@ app.controller('SearchController', ['Filters', 'Products', 'Categories', functio
   };
 
 }]);
-
-
-
-
