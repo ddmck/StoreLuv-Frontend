@@ -6622,12 +6622,26 @@ th.hide-for-touch {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  background-color: white;
+  background-color: #FFFFFF;
   -webkit-box-shadow: 0px 2px 5px 0px rgba(39, 39, 39, 0.5);
           box-shadow: 0px 2px 5px 0px rgba(39, 39, 39, 0.5); }
   @media only screen and (max-width: 64.063em) {
     .product-container {
       margin-bottom: 60px; } }
+  .product-container .feature-product-image-container {
+    width: 100%;
+    height: 291px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: -1px; }
+  .product-container .feature-product-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-height: 100%;
+    /* <-- Set maximum height to 100% of its parent */
+    max-width: 100%; }
   .product-container .product-description {
     position: absolute;
     height: 60px;
@@ -6676,7 +6690,7 @@ th.hide-for-touch {
           -ms-transform: translateX(calc(-100% - 10px));
               transform: translateX(calc(-100% - 10px));
       line-height: 60px; }
-  .product-container .buy-button, .product-container .wish-button {
+  .product-container .buy-button, .product-container .wish-button, .product-container .feature-info-button {
     opacity: 0;
     border-style: solid;
     border-width: 0px;
@@ -6702,22 +6716,23 @@ th.hide-for-touch {
             transition: background-color 300ms ease-out;
     min-width: 50px;
     position: absolute;
-    left: 10px;
+    left: 100%;
+    margin-left: -60px;
     -webkit-transition: opacity 0.25s linear;
             transition: opacity 0.25s linear; }
     @media only screen and (max-width: 64em) {
-      .product-container .buy-button, .product-container .wish-button {
+      .product-container .buy-button, .product-container .wish-button, .product-container .feature-info-button {
         opacity: 1; } }
-    .product-container .buy-button:hover, .product-container .buy-button:focus, .product-container .wish-button:hover, .product-container .wish-button:focus {
+    .product-container .buy-button:hover, .product-container .buy-button:focus, .product-container .wish-button:hover, .product-container .wish-button:focus, .product-container .feature-info-button:hover, .product-container .feature-info-button:focus {
       background-color: #700237; }
-    .product-container .buy-button:hover, .product-container .buy-button:focus, .product-container .wish-button:hover, .product-container .wish-button:focus {
+    .product-container .buy-button:hover, .product-container .buy-button:focus, .product-container .wish-button:hover, .product-container .wish-button:focus, .product-container .feature-info-button:hover, .product-container .feature-info-button:focus {
       color: #FFFFFF; }
   .product-container .buy-button {
     top: 10px; }
-  .product-container .wish-button {
+  .product-container .wish-button, .product-container .feature-info-button {
     top: 45px; }
   @media only screen and (min-width: 64.063em) {
-    .product-container:hover .buy-button, .product-container:hover .wish-button {
+    .product-container:hover .buy-button, .product-container:hover .wish-button, .product-container:hover .feature-info-button {
       opacity: 0.8;
       -webkit-transition: opacity 0.25s linear;
               transition: opacity 0.25s linear; }
