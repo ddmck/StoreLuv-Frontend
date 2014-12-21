@@ -6813,5 +6813,43 @@ th.hide-for-touch {
   .call-to-action .call-to-action-copy {
     font-family: "PT Serif", Georgia, Cambria, "Times New Roman", Times, serif; }
 
+.more-products {
+  width: 100%;
+  background: #8C0343;
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px; }
+  .more-products h3 {
+    color: #FFFFFF; }
+  .more-products .more-products-button {
+    border-style: solid;
+    border-width: 0px;
+    cursor: pointer;
+    font-family: "PT Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+    font-weight: normal;
+    line-height: normal;
+    margin: 0 0 1.25rem;
+    position: relative;
+    text-decoration: none;
+    text-align: center;
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
+    display: inline-block;
+    padding-top: 1rem;
+    padding-right: 2rem;
+    padding-bottom: 1.0625rem;
+    padding-left: 2rem;
+    font-size: 1rem;
+    background-color: #5a022d;
+    border-color: #480224;
+    color: #FFFFFF;
+    border-radius: 3px;
+    -webkit-transition: background-color 300ms ease-out;
+            transition: background-color 300ms ease-out; }
+    .more-products .more-products-button:hover, .more-products .more-products-button:focus {
+      background-color: #480224; }
+    .more-products .more-products-button:hover, .more-products .more-products-button:focus {
+      color: #FFFFFF; }
+
 html {
   -webkit-font-smoothing: antialiased; }
