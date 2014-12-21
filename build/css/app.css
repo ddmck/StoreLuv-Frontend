@@ -6776,78 +6776,42 @@ th.hide-for-touch {
 .feature-hero {
   position: relative;
   width: 100%;
-  height: 500px;
-  background-color: rgba(42, 121, 162, 0.25);
-  background-image: url('https://s3-eu-west-1.amazonaws.com/storeluv/storeluv-landing.jpg');
+  background-color: #0e0e0e;
   background-size: cover;
   background-repeat: no-repeat;
   margin-bottom: 20px;
   -webkit-box-shadow: 0px 2px 5px 0px rgba(39, 39, 39, 0.5);
           box-shadow: 0px 2px 5px 0px rgba(39, 39, 39, 0.5); }
-  @media only screen and (max-width: 64.063em) {
-    .feature-hero {
-      margin-top: 0px;
-      height: 300px; } }
-  .feature-hero .feature-transparency {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(42, 121, 162, 0.25); }
-    .feature-hero .feature-transparency .feature-copy-card {
-      width: 50%;
-      max-height: 400px;
-      margin-top: 50px;
-      background-color: rgba(42, 121, 162, 0.5);
-      padding: 10px;
-      overflow-y: scroll; }
-      @media only screen and (max-width: 64.063em) {
-        .feature-hero .feature-transparency .feature-copy-card {
-          width: calc(100% - 20px);
-          max-height: calc(100% - 20px);
-          margin: 10px; } }
-      .feature-hero .feature-transparency .feature-copy-card .feature-title, .feature-hero .feature-transparency .feature-copy-card .feature-copy, .feature-hero .feature-transparency .feature-copy-card a {
-        color: #FFFFFF; }
-      .feature-hero .feature-transparency .feature-copy-card .feature-title {
-        font-weight: bold; }
-      .feature-hero .feature-transparency .feature-copy-card .feature-copy {
-        font-family: "PT Serif", Georgia, Cambria, "Times New Roman", Times, serif;
-        max-height: 10rem;
-        overflow: scroll; }
-      .feature-hero .feature-transparency .feature-copy-card a {
-        text-decoration: underline; }
+  .feature-hero .feature-copy-card {
+    max-height: 400px;
+    overflow-y: scroll; }
+    @media only screen and (max-width: 64.063em) {
+      .feature-hero .feature-copy-card {
+        margin: 10px; } }
+    .feature-hero .feature-copy-card .feature-title, .feature-hero .feature-copy-card .feature-copy, .feature-hero .feature-copy-card a {
+      color: #FFFFFF; }
+    .feature-hero .feature-copy-card .feature-title {
+      font-weight: bold; }
+    .feature-hero .feature-copy-card .feature-copy {
+      font-family: "PT Serif", Georgia, Cambria, "Times New Roman", Times, serif;
+      max-width: 580px;
+      overflow: scroll; }
+    .feature-hero .feature-copy-card a {
+      text-decoration: underline; }
 
 .call-to-action {
+  padding-top: 20px;
+  padding-bottom: 20px;
   position: relative;
   width: 100%;
-  height: 400px;
-  background-image: url('https://s3-eu-west-1.amazonaws.com/storeluv/call-to-action.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  -webkit-box-shadow: 0px 2px 5px 0px rgba(39, 39, 39, 0.5);
-          box-shadow: 0px 2px 5px 0px rgba(39, 39, 39, 0.5); }
-  @media only screen and (max-width: 64.063em) {
-    .call-to-action {
-      height: 300px; } }
-  .call-to-action .call-to-action-transparency {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(170, 40, 45, 0.25); }
-    .call-to-action .call-to-action-transparency .call-to-action-card {
-      padding-top: 50px; }
-      @media only screen and (max-width: 64.063em) {
-        .call-to-action .call-to-action-transparency .call-to-action-card {
-          padding: 15px; } }
-      .call-to-action .call-to-action-transparency .call-to-action-card .call-to-action-header, .call-to-action .call-to-action-transparency .call-to-action-card .call-to-action-copy, .call-to-action .call-to-action-transparency .call-to-action-card form {
-        max-width: 50%;
-        color: #FFFFFF; }
-        @media only screen and (max-width: 50.063em) {
-          .call-to-action .call-to-action-transparency .call-to-action-card .call-to-action-header, .call-to-action .call-to-action-transparency .call-to-action-card .call-to-action-copy, .call-to-action .call-to-action-transparency .call-to-action-card form {
-            max-width: 100%; } }
-      .call-to-action .call-to-action-transparency .call-to-action-card .call-to-action-header {
-        font-weight: bold; }
-      .call-to-action .call-to-action-transparency .call-to-action-card .call-to-action-copy {
-        font-family: "PT Serif", Georgia, Cambria, "Times New Roman", Times, serif; }
+  background-color: #0e0e0e;
+  color: #FFFFFF; }
+  .call-to-action .call-to-action-header, .call-to-action .call-to-action-copy, .call-to-action form {
+    color: #FFFFFF; }
+  .call-to-action .call-to-action-header {
+    font-weight: bold; }
+  .call-to-action .call-to-action-copy {
+    font-family: "PT Serif", Georgia, Cambria, "Times New Roman", Times, serif; }
 
 html {
   -webkit-font-smoothing: antialiased; }
