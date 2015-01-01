@@ -12,6 +12,7 @@ var s3 = require("gulp-s3");
 var fs = require('fs');
 var aws = JSON.parse(fs.readFileSync('./aws.json'));
 var mocha = require('gulp-mocha');
+var rename = require("gulp-rename");
 
 
 var onError = function (err) {
@@ -62,6 +63,7 @@ gulp.task('rev', ['sass', 'scripts'], function() {
 
 gulp.task('min', function(){
   gulp.src(['build/js/*.js'])
+    .pipe(rename({suffix: '.min'}))
     .pipe(uglify())
     .pipe(gulp.dest('build/min/'));
 });
