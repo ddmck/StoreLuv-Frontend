@@ -6,6 +6,7 @@ var concat = require('gulp-concat');
 var connect = require('gulp-connect');
 var autoprefixer = require('gulp-autoprefixer');
 var stdlib = require('./stdlib');
+var packaged = require('./build/js/packaged');
 var plumber = require('gulp-plumber');
 var gutil = require('gulp-util');
 var s3 = require("gulp-s3");
@@ -62,9 +63,10 @@ gulp.task('rev', ['sass', 'scripts'], function() {
 });
 
 gulp.task('min', function(){
-  gulp.src(['build/js/*.js'])
+  return gulp.src(packaged.files)
+    .pipe(concat('packaged-app.js'))
     .pipe(rename({suffix: '.min'}))
-    .pipe(uglify())
+    .pipe(uglify({mangle: false}))
     .pipe(gulp.dest('build/min/'));
 });
 
@@ -73,11 +75,11 @@ gulp.task('site', function(){
   gulp.src('src/partials/*').pipe(gulp.dest('build/partials/'));
 });
 
-gulp.task('watch', ['sass', 'scripts', 'lib'], function() {
+gulp.task('watch', ['sass', 'scripts', 'lib', 'min'], function() {
   gulp.watch('src/scss/**/*.scss', ['sass']);
-  gulp.watch('src/js/**/*.*', ['scripts']);
+  gulp.watch('src/js/**/*.*', ['scripts', 'min']);
   gulp.watch(['src/index.html', 'src/partials/*'], ['site']);
-  gulp.watch('./stdlib.js', ['lib']);
+  gulp.watch('./stdlib.js', ['lib', 'min']);
   // gulp.watch()
 });
 
