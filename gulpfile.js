@@ -14,6 +14,8 @@ var fs = require('fs');
 var aws = JSON.parse(fs.readFileSync('./aws.json'));
 var mocha = require('gulp-mocha');
 var rename = require("gulp-rename");
+var gzip = require('gulp-gzip');
+
 
 
 var onError = function (err) {
@@ -67,8 +69,10 @@ gulp.task('min', function(){
     .pipe(concat('packaged-app.js'))
     .pipe(rename({suffix: '.min'}))
     .pipe(uglify({mangle: false}))
+    .pipe(gzip())
     .pipe(gulp.dest('build/min/'));
 });
+
 
 gulp.task('site', function(){
   gulp.src('src/index.html').pipe(gulp.dest('build/'));
