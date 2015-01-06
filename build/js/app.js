@@ -323,7 +323,7 @@ app.controller('SearchController', ['Filters', 'Products', 'Categories', functio
 }]);
 
 $(document).ready(function(){
-  $('.feature-buy-button').click(function(){
+  $('.feature-buy-button, .buy-link').click(function(){
     if (!$("#sign-in-li").hasClass("ng-hide")) {
       $('#signUpModal').foundation('reveal', 'open');
     }
