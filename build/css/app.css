@@ -6808,7 +6808,9 @@ th.hide-for-touch {
   position: relative;
   width: 100%;
   background-color: #0e0e0e;
-  color: #FFFFFF; }
+  color: #FFFFFF;
+  -webkit-box-shadow: 0px 500px 0px 500px #0e0e0e;
+          box-shadow: 0px 500px 0px 500px #0e0e0e; }
   .call-to-action .call-to-action-header, .call-to-action .call-to-action-copy, .call-to-action form {
     color: #FFFFFF; }
   .call-to-action .call-to-action-header {
