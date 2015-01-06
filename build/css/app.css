@@ -6728,9 +6728,11 @@ th.hide-for-touch {
       background-color: #700237; }
     .product-container .buy-button:hover, .product-container .buy-button:focus, .product-container .wish-button:hover, .product-container .wish-button:focus, .product-container .feature-info-button:hover, .product-container .feature-info-button:focus {
       color: #FFFFFF; }
-  .product-container .buy-button {
+  .product-container .wish-button.wished {
+    background-color: #2A79A2; }
+  .product-container .buy-button, .product-container .feature-info-button {
     top: 10px; }
-  .product-container .wish-button, .product-container .feature-info-button {
+  .product-container .wish-button {
     top: 45px; }
   @media only screen and (min-width: 64.063em) {
     .product-container:hover .buy-button, .product-container:hover .wish-button, .product-container:hover .feature-info-button {

@@ -69,6 +69,21 @@ app.factory('SubCategories', [ '$http', function($http){
   }
 }]);
 
+app.factory('WishlistItems', [ '$http', function($http){
+  var wishlistItems = [];
+  return {
+    fetchWishlistItems: function(){
+      $http.get('wishlist_items.json').success(function(data){
+        wishlistItems = data;
+        console.table(wishlistItems)
+      });
+    },
+    list: function(){
+      return wishlistItems;
+    }
+  }
+}]);
+
 app.factory('Products', ['$http', 'Filters', '$location', function($http, Filters, $location){
   var query = $location.search();
   Filters.useQuery(query);
@@ -151,11 +166,12 @@ app.controller('UserRegistrationsController', ['$scope', '$auth', function($scop
 }]);
 
 
-app.controller('ProductsController',  ['$http', 'Filters', 'Products', function($http, Filters, Products){
+app.controller('ProductsController',  ['$http', 'Filters', 'Products', 'WishlistItems', function($http, Filters, Products, WishlistItems){
   this.scrollActive = false;
   var scrollActive = this.scrollActive;
   var productCtrl = this;
   productCtrl.products = Products;
+  WishlistItems.fetchWishlistItems();
 
   this.filters = Filters;
   
@@ -175,13 +191,26 @@ app.controller('ProductsController',  ['$http', 'Filters', 'Products', function(
   this.wishFor = function(product, userId){
     if (!userId) {
       $('#signInModal').foundation('reveal', 'open');
+    } else if (_.some(WishlistItems.list(), { 'product_id': product.id })){
+       index = _.findIndex(WishlistItems.list(), { 'product_id': product.id })
+       wishlistItem = WishlistItems.list()[index]
+       $http.delete('wishlist_items/' + wishlistItem.id + '.json', {
+       } ).success(function(data){
+        WishlistItems.fetchWishlistItems();
+       });
     } else {
-      $http.post('products/' + product.id + '/wish.json', {} ).success(function(data){
-        alert("wished for!");
+      $http.post('wishlist_items.json', {wishlist_item: {
+        product_id: product.id
+      }} ).success(function(data){
+        WishlistItems.fetchWishlistItems();
       });  
     }
     
-  };                            
+  }; 
+
+  this.checkIfWishedFor = function(product_id){
+    return _.some(WishlistItems.list(), { 'product_id': product_id });
+  },                           
 
 
   this.openLink = function(product, userId){

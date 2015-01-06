@@ -99,10 +99,15 @@
     // transform: translateX(calc(-100% - 10px));
     transition: opacity 0.25s linear;
   }
-  .buy-button { 
+
+  .wish-button.wished {
+    background-color: $blue;
+  }
+
+  .buy-button, .feature-info-button { 
     top: 10px;
   }
-  .wish-button, .feature-info-button {
+  .wish-button {
     top: 45px;
   }
 
